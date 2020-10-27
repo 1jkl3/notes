@@ -1,0 +1,40 @@
+.rem(@px,@name) {
+  @{name}: (@px * 2 / 100) * 1rem;
+}
+@pageheight:calc (100% - .rem(120,height));
+// 清除浮动
+.clearfix {
+  zoom: 1;
+  &:after {
+    height: 0;
+    content: "";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    font-size: 0;
+  }
+}
+// 三角符号
+.caret(@color @border-px) {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  // border-top: 4px dashed;
+  border-top: @border-px solid @color;
+  border-right: @border-px solid transparent;
+  border-left: @border-px solid transparent;
+}
+// css过渡 @time时间 以s结尾
+.transition(@time) {
+  transition: all @time linear;
+}
+// 超出部分省略号 @num 显示行数
+.ellipsis(@num) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box; //作为弹性伸缩盒子模型显示。
+  -webkit-box-orient: vertical; //设置伸缩盒子的子元素排列方式--从上到下垂直排列
+  -webkit-line-clamp: @num; //显示的行
+}
