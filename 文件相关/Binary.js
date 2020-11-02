@@ -12,7 +12,9 @@ export function dataURLtoBlob(dataurl) {
       while (n--) {
         u8arr[n] = bstr.charCodeAt(n);
       }
-      resolve(new Blob([u8arr], { type: mime }));
+      resolve(new Blob([u8arr], {
+        type: mime
+      }));
     } catch (err) {
       reject(err);
     }
@@ -134,3 +136,35 @@ export function loadMultiImage(images) {
   //全部加载完成
   return Promise.all(promiseAll);
 }
+// 下载base64文件
+export function downLoadBase(file, filename) {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = (e) => {
+    const base64Data = String(e.target.result);
+    // console.log(base64Data);
+    const a = document.createElement('a');
+    a.href = base64Data;
+    a.download = filename;
+    a.click();
+  }
+}
+// 切片下载
+export function downLoadSlice(data, type) {
+  var chunkSize = 1024 * 1024; //每片1M大小
+  var totalSize = data.size;
+  var chunkQuantity = Math.ceil(totalSize/chunkSize); //分片总数
+  let blob = new Blob([data], {type});
+  var datas = [];
+  for(let i = 0;i < chunkQuantity;i++){
+    let sliceBlob = blob.slice(i * chunkSize,(i + 1) * chunkSize,blob.type);
+    datas.push(sliceBlob);
+  }
+  let dl = document.createElement('a');
+  datas.forEach((item,index)=>{
+    dl.download = `down(${index}).${type}`;
+    dl.href = URL.createObjectURL(item);
+    dl.click();
+    URL.revokeObjectURL(dl.href)
+  })
+};
