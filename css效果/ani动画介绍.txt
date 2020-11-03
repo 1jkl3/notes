@@ -1,0 +1,21 @@
+// 第一个参数：关键帧
+// 第二个参数：关键帧执行时间
+// 第三个参数：动画执行方式 linear ease ease-in ease-out ease-in-out
+// 第四个参数：动画执行开始时间
+// 第五个参数：动画循环：infinite 无限循环 number 次数
+// 第六个参数：动画执行方向 normal 正常方向 reverse 反方向 alternate 先正常再反方向 alternate-reverse 先反方向再正常
+// 第七个参数：动画执行到最后的状态 backwards 回到初始状态 forwards 停在最后状态 none both
+// 第八个参数：检索或设置对象动画的状态 running 运行 paused 暂停
+// animation-play-state: running;
+// animation: name 1s linear 0.1ms infinite normal forwards running;
+// @keyframes name {
+//     0% {
+//         transform: scale(1);
+//     }
+//     50% {
+//         transform: scale(2);
+//     }
+//     100% {
+//         transform: scale(1);
+//     }
+// }
