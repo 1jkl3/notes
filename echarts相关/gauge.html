@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仪表盘演示</title>
+    <script src="echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="map" style="height: 400px;width: 100%;"></div>
+    <script>
+        var myechar = echarts.init(document.getElementById("map"));
+        var options = {
+            series:[
+                {
+                    type:"gauge",
+                    data:[
+                        {
+                            value:97,
+                            itemStyle:{// 仪表盘的样式
+                                color:"pink"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+        myechar.setOption(options);
+    </script>
+</body>
+</html>

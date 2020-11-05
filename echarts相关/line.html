@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>线图演示</title>
+    <script src="echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map" style="height: 400px;width: 100%;"></div>
+</body>
+<script>
+    var myechar = echarts.init(document.getElementById("map"));
+    var data = [100, 0, 0, 500, 600, 700, 800,100, 0, 0, 500, 600, 700, 800,100, 0, 0, 500, 600, 700, 800,100, 0, 0, 500, 600, 700, 800,20,222];
+    let min = Math.min(...data);
+    let max = Math.max(...data);
+    var option = {
+        xAxis: {
+            type: 'category',
+            splitLine: {
+                show: true
+            },
+            axisLine: {
+                show: false
+            },
+            boundaryGap: false,
+            data: ['周一\n6-2', '周二', '周三', '周四', '周五', '周六', '周日','周一', '周二', '周三', '周四', '周五', '周六', '周日','周一', '周二', '周三', '周四', '周五', '周六', '周日','周一', '周二', '周三', '周四', '周五', '周六', '周日',"周一","周二"]
+        },
+        yAxis: {
+            type: 'value',
+            show: false
+        },
+        dataZoom: [{
+            type: 'inside',
+            // show: true, //flase直接隐藏图形
+            xAxisIndex: [0],
+            // left: '10%', //滚动条靠左侧的百分比
+            // bottom: -5,
+            start: 0,//滚动条的起始位置
+            end: 21 //滚动条的截止位置（按比例分割你的柱状图x轴长度）
+        }],
+        series: [
+            {
+                type: 'line',
+                // 线条弯曲度
+                smooth: true,
+                symbol: "circle",
+                //圆球大小
+                symbolSize: 6,
+                // 数据线颜色
+                lineStyle: {
+                    color: '#0B7CF6',
+                    width: 1
+                },
+                // 圆球颜色
+                itemStyle: {
+                    normal: {
+                        label: {
+                            show: true,
+                            formatter: function (params) {
+                                if (params.value == min) {
+                                    return "最低价\n" + "￥" + params.value;
+                                } else if (params.value == max) {
+                                    return "最高价\n" + "￥" + params.value;
+                                } else {
+                                    return "￥" + params.value;
+                                }
+                            },
+                            color: "#000",
+                        },
+                        color: "#0B7CF6"
+                    },
+                },
+                areaStyle: {
+                    color: {
+                        type: 'linear',
+                        x: 0,
+                        y: 0,
+                        x2: 0,
+                        y2: 1,
+                        colorStops: [{
+                            offset: 0, color: '#0B7CF6' // 0% 处的颜色
+                        },
+                        {
+                            offset: 1, color: '#FFF' // 100% 处的颜色
+                        }],
+                        global: false // 缺省为 false
+                    }
+                },
+                data: data
+            }
+        ]
+    };
+    myechar.setOption(option);
+</script>
+
+</html>

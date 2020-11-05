@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雷达图演示</title>
+    <script src="echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="map" style="height: 400px;width: 100%;"></div>
+    <script>
+        var myechar = echarts.init(document.getElementById("map"));
+        // 各个维度的最大值
+        var indicator = [
+            {
+                name:"易用性",
+                max:100
+            },
+            {
+                name:"功能",
+                max:100
+            },
+            {
+                name:"拍照",
+                max:100
+            },
+            {
+                name:"跑分",
+                max:100
+            },
+            {
+                name:"续航",
+                max:100
+            },
+        ];
+        var options = {
+            radar:{
+                indicator:indicator,
+                shape:"circle" // 形状
+            },
+            series:[
+                {
+                    type:"radar",
+                    label:{
+                        show:true
+                    },
+                    data:[
+                        {
+                            name:"华为手机",
+                            value:[88,77,66,55,44]
+                        },
+                        {
+                            name:"小米手机",
+                            value:[11,22,33,44,55]
+                        }
+                    ]
+                }
+            ]
+        }
+        myechar.setOption(options);
+    </script>
+</body>
+</html>

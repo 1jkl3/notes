@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>柱状图演示</title>
+    <script src="echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map" style="height: 400px;width: 100%;"></div>
+
+    <script>
+        var myechar = echarts.init(document.getElementById("map"));
+        var barDatax = ["小米", "苹果", "华为", "魅族", "锤子", "诺基亚"]
+        var barDatay = [10, 52, 3, 15, 78, 68]
+        var option = {
+            // xAxis: {
+            //     type: "category",
+            //     data: barDatax,
+            //     scale: true
+            //     // boundaryGap: false,
+            // },
+            // yAxis: {
+            //     type: "value",
+            //     scale: true
+            // },
+            // 横向柱状图
+            xAxis: {
+                type: "value",
+                scale: true
+            },
+            yAxis: {
+                type: "category",
+                scale: true,
+                data: barDatax,
+            },
+            series: [
+                {
+                    type: "bar",
+                    data: barDatay,
+                    markPoint:{
+                        data:[
+                            {
+                                type:"max",
+                                name:"最大值"
+                            },
+                            {
+                                type:"min",
+                                name:"最小值"
+                            }
+                        ]
+                    },
+                    markLine:{
+                        data:[
+                            {
+                                type:"average",
+                                name:"平均值"
+                            }
+                        ]
+                    },
+                    label:{
+                        show:true,
+                        rotate:-60,
+                    },
+                    itemStyle:{
+
+                    }
+                }
+            ]
+        }
+        myechar.setOption(option);
+    </script>
+</body>
+
+</html>

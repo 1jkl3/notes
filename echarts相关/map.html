@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地图演示</title>
+    <script src="echarts.min.js"></script>
+    <script src="jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+    <div id="map" style="height: 400px;width: 100%;"></div>
+    <script>
+        var myechar = echarts.init(document.getElementById("map"));
+        var airData = [
+            {
+                name: "北京",
+                value: 39.2
+            },
+            {
+                name: "天津",
+                value: 31.2
+            },
+            {
+                name: "陕西",
+                value: 32.2
+            },
+            {
+                name: "澳门",
+                value: 33.2
+            },
+            {
+                name: "香港",
+                value: 34.2
+            },
+            {
+                name: "广西",
+                value: 35.2
+            },
+            {
+                name: "新疆",
+                value: 36.2
+            },
+            {
+                name: "四川",
+                value: 37.2
+            },
+            {
+                name: "山东",
+                value: 38.2
+            },
+            {
+                name: "湖南",
+                value: 139.2
+            },
+            {
+                name: "黑龙江",
+                value: 239.2
+            },
+            {
+                name: "内蒙古",
+                value: 119.2
+            },
+            {
+                name: "河北",
+                value: 129.2
+            },
+            {
+                name: "河南",
+                value: 139.2
+            },
+            {
+                name: "重庆",
+                value: 149.2
+            },
+            {
+                name: "云南",
+                value: 159.2
+            },
+            {
+                name: "西藏",
+                value: 163.2
+            },
+            {
+                name: "贵州",
+                value: 179.2
+            },
+            {
+                name: "宁夏",
+                value: 14.2
+            },
+            {
+                name: "吉林",
+                value: 123.2
+            },
+            {
+                name: "辽宁",
+                value: 181.2
+            },
+            {
+                name: "青海",
+                value: 191.2
+            },
+            {
+                name: "香港",
+                value: 212.2
+            },
+            {
+                name: "台湾",
+                value: 223.2
+            },
+            {
+                name: "上海",
+                value: 224.2
+            },
+            {
+                name: "山西",
+                value: 225.2
+            },
+            {
+                name: "江苏",
+                value: 221.2
+            },
+            {
+                name: "安徽",
+                value: 42.2
+            },
+            {
+                name: "福建",
+                value: 251.2
+            },
+            {
+                name: "浙江",
+                value: 142.2
+            },
+            {
+                name: "甘肃",
+                value: 122.2
+            },
+            {
+                name: "广东",
+                value: 111.2
+            },
+            {
+                name: "海南",
+                value: 113.2
+            },
+            {
+                name: "湖北",
+                value: 176.2
+            },
+
+        ]
+        const scatterData = [
+            {
+                value:[117.283042,31.86119]
+            }
+        ]
+        console.log(airData);
+        $.ajax({
+            url: "map/json/china.json",
+            success: function (params) {
+                echarts.registerMap("chinaMap", params);
+                var options = {
+                    geo: {
+                        type: "map",
+                        label: {
+                            show: true
+                        },
+                        map: "chinaMap", // 这里的value是echarts.registerMap注册时的key
+                        roam: true // 放大缩小拖动
+                    },
+                    series: [
+                        {
+                            type: "map",
+                            geoIndex: 0,
+                            data: airData,
+
+                        },
+                        {
+                            type:"effectScatter",
+                            data:scatterData,
+                            rippleEffect:{
+                                scale:10
+                            },
+                            coordinateSystem:"geo"
+                        }
+                    ],
+                    // 数据与地图联动
+                    visualMap: {
+                        min: 0,
+                        max: 300,
+                        inRange: {
+                            color: ["white", "red"]
+                        },
+                        calculable:true
+                    }
+                };
+                myechar.setOption(options);
+            }
+        })
+
+    </script>
+</body>
+
+</html>

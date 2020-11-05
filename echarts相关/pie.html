@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>饼图演示</title>
+    <script src="echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map" style="height: 400px;width: 100%;"></div>
+    <script>
+        var myechar = echarts.init(document.getElementById("map"));
+        var pieData = [
+            {
+                name:"淘宝",
+                value:1234
+            },
+            {
+                name:"京东",
+                value:1224
+            },
+            {
+                name:"苏宁",
+                value:1134
+            },
+            {
+                name:"拼多多",
+                value:1214
+            },
+            {
+                name:"闲鱼",
+                value:1131
+            },
+            {
+                name:"天猫",
+                value:1274
+            },
+            {
+                name:"我",
+                value:1234
+            },
+        ]
+        var options = {
+            series:[
+                {
+                    type:"pie",
+                    data:pieData,
+                    label:{//文字内容
+                        show:true,
+                        formatter:(e)=>{
+                            return e.name + "平台\n" + e.value + "元\n" + e.percent + "%";
+                        }
+                    },
+                    emphasis:{},// 高亮样式 意思是触发行为时的样式变化
+                    color:['pink','yellow','black','orange','red'],
+                    // radius:20, // 半径
+                    // radius:"20%" // 半径百分比设置参照的是宽度和高度中较小的那一部分的一半
+                    // radius:["50%","70%"], // 圆环 第一个是内圆的半径 第二个是外圆的半径
+                    roseType:"radius", // 南丁格尔图 饼图的每一个区域的半径是不同的，是随着数值的变化而改变
+                }
+            ]
+        }
+        myechar.setOption(options);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>散点图演示</title>
+    <script src="echarts.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map" style="height: 400px;width: 100%;"></div>
+    <script>
+        var myechar = echarts.init(document.getElementById("map"));
+        var mapData = [
+            {
+                height: 180.3,
+                weight: 85.9
+            },
+            {
+                height: 167.6,
+                weight: 72.3
+            },
+            {
+                height: 174,
+                weight: 80
+            },
+            {
+                height: 184.2,
+                weight: 77.3
+            },
+            {
+                height: 190.5,
+                weight: 98.2
+            },
+            {
+                height: 177.8,
+                weight: 84.1
+            },
+        ]
+        var scatterData = [];
+        mapData.forEach(item => {
+            scatterData.push([item.height, item.weight])
+        })
+        var options = {
+            xAxis: {
+                type: "value",
+                scale: true // 不从0开始
+            },
+            yAxis: {
+                type: "value",
+                scale: true
+            },
+            series: [
+                {
+                    // type: "scatter",
+                    // 涟漪效果
+                    type:"effectScatter",
+                    showEffectOn:"emphasis", //鼠标经过时产生动画
+                    data: scatterData,
+                    // symbolSize:20, // 散点大小
+                    symbolSize: (e) => {
+                        let height = e[0] / 100;
+                        let weight = e[1];
+                        // 肥胖值  大于28 肥胖
+                        var bmi = weight / (height * height);
+                        if (bmi > 28) {
+                            return 20;
+                        }
+                        return bmi / 2
+                    },
+                    itemStyle: { // 散点样式
+                        color: (e) => { // 颜色
+                            let height = e.data[0] / 100;
+                            let weight = e.data[1];
+                            // 肥胖值  大于28 肥胖
+                            var bmi = weight / (height * height);
+                            if(bmi > 28){
+                                return "red"
+                            }
+                            return "green"
+                        }
+                    }
+                }
+            ]
+        }
+        myechar.setOption(options);
+    </script>
+</body>
+
+</html>
