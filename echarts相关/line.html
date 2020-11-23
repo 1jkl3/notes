@@ -19,6 +19,8 @@
 </body>
 <script>
     var myechar = echarts.init(document.getElementById("map"));
+	
+	
     var data = [100, 0, 0, 500, 600, 700, 800,100, 0, 0, 500, 600, 700, 800,100, 0, 0, 500, 600, 700, 800,100, 0, 0, 500, 600, 700, 800,20,222];
     let min = Math.min(...data);
     let max = Math.max(...data);
@@ -100,6 +102,7 @@
         ]
     };
     myechar.setOption(option);
+	
 </script>
 
 </html>

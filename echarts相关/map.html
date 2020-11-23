@@ -154,10 +154,10 @@
         ]
         const scatterData = [
             {
-                value:[117.283042,31.86119]
+                value: [117.283042, 31.86119]
             }
         ]
-        console.log(airData);
+        // console.log(airData);
         $.ajax({
             url: "map/json/china.json",
             success: function (params) {
@@ -179,12 +179,12 @@
 
                         },
                         {
-                            type:"effectScatter",
-                            data:scatterData,
-                            rippleEffect:{
-                                scale:10
+                            type: "effectScatter",
+                            data: scatterData,
+                            rippleEffect: {
+                                scale: 10
                             },
-                            coordinateSystem:"geo"
+                            coordinateSystem: "geo"
                         }
                     ],
                     // 数据与地图联动
@@ -194,10 +194,14 @@
                         inRange: {
                             color: ["white", "red"]
                         },
-                        calculable:true
+                        calculable: true
                     }
                 };
                 myechar.setOption(options);
+                
+                // myechar.on('click', function (params) {
+                //     console.log("打野");
+                // });
             }
         })
 
