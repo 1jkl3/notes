@@ -1,6 +1,6 @@
 // charts图表数据接口类
 const { sellerModel, trendModel, mapModel, rankModel, productModel, stockModel } = require("../model/index");
-const response = require("../util/response");
+const response = require("../util/response").default;
 const fs = require("fs");
 const paths = require("path")
 class Charts {

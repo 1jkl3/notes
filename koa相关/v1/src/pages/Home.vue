@@ -1,6 +1,7 @@
 <template>
   <!-- <div>首页1{{ store.state.count }}</div> -->
   <Seller :charts="chart1" v-if="chart1" />
+  <button @click="getSocket">获取事件</button>
 </template>
 
 <script>
@@ -8,6 +9,7 @@ import { defineComponent, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
 import Seller from "/@/components/Seller.vue";
 import { get } from "/@/util/network";
+import Socket from '/@/util/socket';
 export default defineComponent({
   name: "Home",
   components: {
@@ -24,11 +26,17 @@ export default defineComponent({
         res.data.sort((a, b) => a.value - b.value);
         state.chart1 = res.data;
       },
-      
-      // getRankList:async ()=>{
-      //   let res = await get("/rank");
-      //   console.log(res);
-      // }
+      async getSocket(){
+        let payload = {
+          action:"data",
+          socketType:"seller",
+          chartName:"seller"
+        }
+        await Socket.send(payload);
+        Socket.messgae((res)=>{
+          console.log(res.data);
+        });
+      }
     };
     methods.getSellerList();
     return {

@@ -1,6 +1,5 @@
 const { sellerModel, trendModel, mapModel, rankModel, productModel, stockModel } = require("../model/index");
-const {response,Info} = require("../util/response");
-console.log(Info);
+const response = require("../util/response").default;
 class wsContr{
     public async getSellerList(): Promise<Error | void> {
         try {

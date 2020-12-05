@@ -1,5 +1,5 @@
 const WS = require("ws");
-const controllers = require("../controller/index");
+const controllers = require("../controller/wsContr");
 /**
  * action 状态值 参数内容
  *        data ：：数据内容
@@ -28,13 +28,13 @@ interface messageInfo {
     data?: Object
 }
 
-const dataInfo = {
-    "seller":controllers.getSellerList,
-    "trend":controllers.getTrendInfo,
-    "maps":controllers.getMapList,
-    "rank":controllers.getRankList,
-    "product":controllers.getProductList,
-    "stock":controllers.getStockList
+const dataInfo:any = {
+    seller:controllers.getSellerList,
+    trend:controllers.getTrendInfo,
+    maps:controllers.getMapList,
+    rank:controllers.getRankList,
+    product:controllers.getProductList,
+    stock:controllers.getStockList
 }
 
 class ServerSocket {
@@ -68,19 +68,17 @@ class ServerSocket {
                         item.send(payload)
                     })
                 }
-
             })
             client.on("disconnect", (err: string) => {
                 console.log("断开连接");
-                console.log(err);
+                // console.log(err);
             })
         })
     }
 
-    private getData(data: messageInfo, client: any) {
-        // dataInfo[data.chartName]
-        
-        client.send(JSON.stringify(data));
+    private async getData(data: messageInfo, client: any) {
+        let info = await dataInfo[data.chartName]()
+        client.send(JSON.stringify(info));
     }
 }
 
