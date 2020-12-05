@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            text-align: center;
+        }
+        #container{
+            border: 1px solid #EEE;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="container" width="300" height="300"></canvas>
+    <button id="rotateDownload">旋转后保存</button>
+    <script>
+        // 下载图片参考链接 https://blog.csdn.net/wogieni/article/details/97416465
+        var canvas = document.querySelector("#container");
+        var ctx = canvas.getContext("2d");
+        var btn = document.querySelector("#rotateDownload");
+        var imgUrl = "./logo.png";
+        var image = null;
+        imgLoad(imgUrl).then(res => {
+            // 将这个加载好的图片存入缓存
+            image = res.target;
+            // 绘制图片且居中
+            ctx.drawImage(image, (canvas.width / 2) - image.width / 2, (canvas.height / 2) - image.height / 2);
+        })
+        // 旋转加保存到本地
+        btn.addEventListener("click", function () {
+            ctx.save();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // 起始画布平移到中心
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+            // 旋转90%
+            ctx.rotate(1 * Math.PI);
+            // 结束画布平移到负中心位置
+            ctx.translate(-canvas.width / 2, -canvas.height / 2);
+            // 绘制图片并居中
+            ctx.drawImage(image, (canvas.width / 2) - image.width / 2, (canvas.height / 2) - image.height / 2);
+            ctx.restore();
+            var data = canvas.toDataURL("image/png");
+            // 下载
+            downLoad(data);
+        })
+        // 图片加载
+        function imgLoad(url) {
+            var image = new Image();
+            image.src = url;
+            return new Promise((resolve, reject) => {
+                image.onload = resolve;
+                image.onerror = reject;
+            })
+        }
+        //下载图片
+        function downLoad(url) {
+            var link = document.createElement("a");
+            // 将base64转化为Blob
+            var blob = dataURLtoBlob(url);
+            // 文件后缀名
+            var ext = blob.type.split("/")[1];
+            // 文件名
+            var filename = new Date().valueOf();
+            // 创建一个URL对象
+            var objurl = URL.createObjectURL(blob);
+            link.download = filename + "." + ext;
+            link.href = objurl;
+            link.click();
+            // 释放一个URL对象
+            URL.revokeObjectURL(objurl);
+        }
+        // 转化为Blob 可保存大文件
+        function dataURLtoBlob(dataurl) {
+            var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+                bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new Blob([u8arr], { type: mime });
+        }
+    </script>
+</body>
+
+</html>

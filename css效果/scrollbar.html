@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        #container {
+            margin: 0 auto;
+            height: 400px;
+            width: 300px;
+            box-sizing: border-box;
+            overflow-y: hidden;
+            position: relative;
+            padding-right: 30px;
+        }
+
+        .scrollbar {
+            height: 166px;
+            width: 20px;
+            border-radius: 20px;
+            background: #ccc;
+            position: absolute;
+            right: 0;
+            cursor: pointer;
+        }
+
+        .back-top {
+            position: absolute;
+            right: 30px;
+            background-color: red;
+            color: #FFF;
+            bottom: 0px;
+            cursor: pointer;
+        }
+        .content{
+            margin-bottom: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="container">
+        <div class="back-top">
+            <span>回到</span><br />
+            <span>顶部</span>
+        </div>
+        <div class="scrollbar"></div>
+        <div class="content">
+            bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla,
+            bla,
+            bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字
+            bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla,
+            bla,
+            bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字
+            bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla,
+            bla,
+            bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字
+            bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla,
+            bla,
+            bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字
+            bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla,
+            bla,
+            bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字
+            bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla,
+            bla,
+            bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字
+            bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla,
+            bla,
+            bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字
+            bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla,
+            bla,
+            bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字
+            bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla,
+            bla,
+            bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字
+            bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla,
+            bla,
+            bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字
+            bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla,
+            bla,
+            bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字
+            bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla,
+            bla,
+            bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字
+            bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla,
+            bla,
+            bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla,
+            bla...
+            一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla...
+            一大段很长的文字bla,
+            bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字bla, bla, bla... 一大段很长的文字
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            var container = document.querySelector('#container');
+            var scrollbar = document.querySelector('.scrollbar');
+            var backTop = document.querySelector(".back-top");
+            // 滚动条比例量
+            //(container.scrollHeight - container.offsetHeight) 算出容器的剩余高度
+            //(container.offsetHeight - backTop.offsetHeight) 算出滚动条的剩余高度
+            // 比例量 = 容器剩余高度 / 该容器中滚动条剩余高度
+            var ratio =
+                (container.scrollHeight - container.offsetHeight) / (container.offsetHeight - scrollbar.offsetHeight);
+            container.addEventListener('mousewheel', function (e) {
+                // 获取鼠标滚动时的滚动高度
+                this.scrollTop += e.deltaY;
+                // 计算跟随容器滚动时滚动条距离容器顶部的高度
+                scrollbar.style.top = (this.scrollTop + this.scrollTop / ratio) + 'px';
+                // 回到顶部的容器保持原距离不变
+                backTop.style.bottom = -(this.scrollTop) + 'px';
+            });
+            // 判断是否可以滚动
+            var isDown = false;
+            // 初次滚动条鼠标距离顶部的距离
+            var prevY = 0;
+            scrollbar.addEventListener("mousedown", function (e) {
+                isDown = true;
+                prevY = e.pageY;
+            })
+            scrollbar.addEventListener("mouseup", function () {
+                isDown = false;
+                prevY = 0;
+            })
+            scrollbar.addEventListener("mousemove", function (e) {
+                if (isDown) {
+                    // 计算容器滚动量 scrollTop
+                    // 滚动量 = (滚动条鼠标距离顶部的距离 - 初次滚动条鼠标距离顶部的距离) * 比例量
+                    container.scrollTop += (e.pageY - prevY) * ratio;
+                    scrollbar.style.top = (container.scrollTop + container.scrollTop / ratio) + 'px';
+                    backTop.style.bottom = -(container.scrollTop) + 'px';
+                    prevY = e.pageY;
+                }
+                e.preventDefault();
+            })
+            // 回到顶部
+            backTop.addEventListener("click", function () {
+                scrollbar.style.top = 0 + "px";
+                backTop.style.bottom = 0 + "px";
+                container.scrollTop = 0;
+                prevY = 0;
+                isDown = false;
+            }, false)
+        }
+    </script>
+</body>
+
+</html>

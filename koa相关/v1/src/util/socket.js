@@ -17,7 +17,7 @@ class Socket {
             this.socket = new WebSocket(this.url);
             this.socket.onopen = this.open.bind(this);
             this.socket.onclose = this.close;
-            this.socket.onerror = this.error;
+            this.error();
         } else {
             this.error(new Error("您的浏览器不支持 WebSocket!"))
         }
@@ -46,8 +46,10 @@ class Socket {
         console.log("关闭");
     }
     error(err) {
-        this.isOpen = false
-        console.log(err);
+        this.socket.onerror = e=>{
+            console.log(err);
+            this.isOpen = false
+        }
     }
 }
 export default Socket.getInstance;
