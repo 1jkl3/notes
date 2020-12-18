@@ -10,54 +10,55 @@
 <body>
     <canvas id="canvas" width="120" height="40"></canvas>
     <script>
-        var mi = code("#canvas",120,40);
-        console.log(mi);
-        function code(selector,width,height) {
+        var mi = code("#canvas", 120, 40);
+        
+        function code(selector, width, height) {
             // 随机数
-            function rn(min,max){
+            function rn(min, max) {
                 return parseInt(Math.random() * (max - min) + min)
             }
             // 随机色
-            function rc(min,max){
-                let r = rn(min,max);
-                let g = rn(min,max);
-                let b = rn(min,max);
+            function rc(min, max) {
+                let r = rn(min, max);
+                let g = rn(min, max);
+                let b = rn(min, max);
                 return `rgb(${r},${g},${b})`;
             }
             var result = "";
             var canvas = document.querySelector(selector);
             var ctx = canvas.getContext("2d");
             var pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            ctx.fillStyle = rc(180,230);
-            ctx.fillRect(0,0,width,height);
-            for(var i = 0;i < 4;i++){
-                var res = pool[rn(0,pool.length)];
+            ctx.fillStyle = rc(180, 230);
+            ctx.fillRect(0, 0, width, height);
+            for (var i = 0; i < 4; i++) {
+                var res = pool[rn(0, pool.length)];
+                var fontsize = rn(18, 40);
+                ctx.save();
                 // 随机字体大小
-                ctx.font = rn(18,40) + "px Simhei";
+                ctx.font = fontsize + "px Simhei";
                 // 文字基线
                 ctx.textBaseline = "top";
                 // 字体颜色
-                ctx.fillStyle = rc(80,150);
-                ctx.save();
-                ctx.translate(30 * i + 5,5);
-                ctx.rotate(rn(-30,30) * Math.PI / 180);
-                ctx.fillText(res,5,-5)
+                ctx.fillStyle = rc(80, 150);
+                ctx.translate(25 * i + 5, 5);
+                ctx.rotate(rn(-30, 30) * Math.PI / 180);
+                ctx.fillText(res, 5, 0)
                 ctx.restore();
                 result += res;
             }
-            for(var j = 0;j < 8;j++){
+            for (var j = 0; j < 8; j++) {
                 ctx.beginPath();
-                ctx.moveTo(rn(0,width),rn(0,height));
-                ctx.lineTo(rn(0,width),rn(0,height));
-                ctx.strokeStyle = rc(180,320);
+                ctx.moveTo(rn(0, width), rn(0, height));
+                ctx.lineTo(rn(0, width), rn(0, height));
+                ctx.strokeStyle = rc(180, 320);
                 ctx.closePath();
                 ctx.stroke()
             }
-            for(var k = 0;k < 80;k++){
+            for (var k = 0; k < 80; k++) {
                 ctx.beginPath();
-                ctx.arc(rn(0,width),rn(0,height),1,0,2*Math.PI);
+                ctx.arc(rn(0, width), rn(0, height), 1, 0, 2 * Math.PI);
                 ctx.closePath();
-                ctx.fillStyle = rc(150,200);
+                ctx.fillStyle = rc(150, 200);
                 ctx.fill()
             }
             return result;
