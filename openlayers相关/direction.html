@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>方向箭头</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.6.5/ol.css"
+        integrity="sha256-rQq4Fxpq3LlPQ8yP11i6Z2lAo82b6ACDgd35CKyNEBw=" crossorigin="anonymous" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/4.6.5/ol.js"
+        integrity="sha256-77IKwU93jwIX7zmgEBfYGHcmeO0Fx2MoWB/ooh9QkBA=" crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/rbush@2.0.1/rbush.min.js"></script>
+
+
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        var wkt = 'LineString( 120 30 , 121 31 ,121 32 ,122 33 )';
+
+        var format = new ol.format.WKT();
+
+        var feature = format.readFeature(wkt, {});
+        function direction_labeling_01(res, lineStringForl, coordis, vs, styles) {
+            // 这个地方可以修改成你要的箭头数量
+            let arrow_count = res * 1.0 * 40;
+
+            for (let i = 0; i < arrow_count; i++) {
+                // 求坐标
+                let array_coor = lineStringForl.getCoordinateAt(i * 1.0 / res);
+
+                // // array_coor 在 coordis 不显示
+                if (inc(coordis, array_coor)) {
+                    console.log("相同" + i);
+                    continue;
+                }
+                let rat = calcLinePointD(vs, array_coor);
+
+                // 根据 array_coor 在那一条线段上设置 旋转角度
+                styles.push(new ol.style.Style({
+                    geometry: new ol.geom.Point(array_coor),
+                    image: new ol.style.Icon({
+                        src: './fx.png',
+                        anchor: [0.75, 0.5],
+                        rotateWithView: true,
+                        rotation: -rat
+                    })
+                }));
+            }
+        }
+        // 将方向标注放在线段中间
+        function direction_labeling_02(vs, styles) {
+            for (let i = 0; i < vs.length; i++) {
+                let line = vs[i]['line'];
+                let start = line[0];
+                let end = line[1];
+                let array_coor = [
+                    (start[0] + end[0]) / 2, (start[1] + end[1]) / 2
+                ];
+                let d = vs[i]['d'];
+
+                styles.push(new ol.style.Style({
+                    geometry: new ol.geom.Point(array_coor),
+                    image: new ol.style.Icon({
+                        scale: 0.6,
+                        src: './fx.png',
+                        anchor: [0.5, 0.5],
+                        rotateWithView: true,
+                        rotation: -d
+                    })
+                }))
+            }
+
+
+        }
+
+        /**
+         *
+         * @param feature feature
+         * @param res 总共多少个箭头
+         * @returns {ol.style.Style[]}
+         */
+        function styleFunction(feature, res) {
+            var lineStringForl = feature.getGeometry();
+            var coordis = lineStringForl.getCoordinates();
+
+            var styles = [
+                new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: '#23218b',
+                        width: 10
+                    })
+                })
+            ];
+            console.log(coordis);
+            // 计算线段角度
+            let vs = calcLineStringD(coordis);
+            direction_labeling_02(vs, styles);
+            console.log(styles);
+            return styles;
+        }
+
+        // 计算点是否在线上
+        function pointInLine(line, Q) {
+
+            let pi = line[0];
+            let pj = line[1];
+
+            if ((Q[0] - pi[0]) * (pj[1] - pi[1]) == (pj[0] - pi[0]) * (Q[1] - pi[1]) && Math.min(pi[0], pj[0])
+                <= Q[0] && Q[0] <= Math.max(pi[0], pj[0]) && Math.min(pi[1], pj[1]) <= Q[1] && Q[1] <= Math.max(pi[1],
+                    pj[1])) {
+                console.log("再线段上");
+                return true;
+            } else {
+                console.log("不再线段上");
+                return false;
+            }
+
+        }
+
+        // 返回点所在线段的具体角度
+        function calcLinePointD(vs, point) {
+            for (let i = 0; i < vs.length; i++) {
+                let line = vs[i]['line'];
+                let d = vs[i]['d'];
+                if (pointInLine(line, point) == true) {
+                    return d;
+                }
+            }
+        }
+
+        // 计算线段角度
+        function calcLineStringD(coordis) {
+            let n = coordis.length;
+            let vs = [];
+            for (let i = 0; i < n; i++) {
+                if (i + 1 < n) {
+                    vs.push({
+                        "line": [coordis[i], coordis[i + 1]],
+                        "d": calcD(coordis[i], coordis[i + 1])
+                    })
+                }
+            }
+            return vs;
+        }
+
+        // 计算线段角度
+        function calcD(start, end) {
+            let dx = end[0] - start[0];
+            let dy = end[1] - start[1];
+            // 减1.6是因为箭头方向为上的的图片呈现出的是向左，这边做一个角度调整
+            let rotation = Math.atan2(dy, dx) - 1.6;
+            console.log("角度" + rotation);
+            return rotation;
+        }
+
+        /**
+         * 判断坐标组合cood中是否有atc,
+         * 不会判断强写
+         * @param cood 坐标组合
+         * @param atc 坐标
+         * @returns {boolean}
+         */
+        function inc(cood, atc) {
+            for (c in cood) {
+                if (cood[c][0] == atc[0] && cood[c][1] == atc[1]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        var vector = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: [feature]
+            }),
+            style: styleFunction(feature, 100)
+        });
+        var gaodeMapLayer = new ol.layer.Tile({
+            source: new ol.source.XYZ({
+                url: 'http://wprd0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}'
+            })
+        });
+
+        var map = new ol.Map({
+            layers: [gaodeMapLayer, vector],
+            view: new ol.View({
+                center: [120, 30],
+                projection: 'EPSG:4326',
+                zoom: 5
+            }),
+            target: 'map'
+        });
+    </script>
+</body>
+
+</html>

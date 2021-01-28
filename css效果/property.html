@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编译中梦见未来</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                logo
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="https://space.bilibili.com/432444813/" target="_blank">首页</a></li>
+                    <li><a href="https://space.bilibili.com/432444813/" target="_blank">博客</a></li>
+                    <li><a href="https://space.bilibili.com/432444813/" target="_blank">代码库</a></li>
+                    <li><a href="https://space.bilibili.com/432444813/" target="_blank">关于UP</a></li>
+                    <li><a href="https://space.bilibili.com/432444813/" target="_blank">联系</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="left">
+                <h1>编译中梦见未来</h1>
+                <summary>
+                    不会写后台的前端工程师不是好产品
+                    <br><br>
+                    以下内容抄录自网络。
+                </summary>
+                <article>
+                    <h2>1. 您现在负责的工作是什么呢？</h2>
+                    <p>现在在一家叫币信的区块链公司工作，负责产品设计和前端重构。</p>
+                    <h2>2. 说说职业生涯重要的转折点？</h2>
+
+                    </p>
+                    <p>我真正参加工作的时间跟前辈们比起来，并不算长。过去几年对我改变最大的，应该是3次关键的转折点：</p>
+
+                    <p>第三次是从头条离职加入一家创业公司，也就是现在的公司，做的是区块链比特币方向的创业。我个人在2013年就有投资，觉得这个领域依然有很多事情可以做，就没有犹豫太多，加入初创团队了。</p>
+                    <h2>3. 今日头条和币信工作都学到了什么？</h2>
+                    <p>每段工作经历带给我的感受都不一样，大公司，小公司，自己创业，各有各的优缺点。如果算上大学期间在新东方兼课，我在从事现在这份工作前，一共换了7份工作。职业身份从讲师到产品经理，从 UI
+                        设计师到前端重构工程师，堪比打杂专家，余不一一。职位的变化完全是由公司的业务需求决定，以至于过去长达两年的这段「职业尝试期」，我一直处于一个比较痛苦的学习状态，偶尔因为学习带来的快乐，也会瞬间被现实击垮。
+                    </p>
+                </article>
+            </section>
+            <aside class="right">
+                <section class="ad">
+                    广告
+                </section>
+                <section class="date">
+                    日历
+                </section>
+                <section class="index">
+                    索引
+                </section>
+            </aside>
+        </main>
+
+        <footer>
+            <ul>
+                <li><a href="https://space.bilibili.com/432444813/" target="_blank">关于</a></li>
+                <li><a href="https://space.bilibili.com/432444813/" target="_blank">知识产权</a></li>
+                <li><a href="https://space.bilibili.com/432444813/" target="_blank">B站</a></li>
+                <li><a href="https://space.bilibili.com/432444813/" target="_blank">赞助</a></li>
+            </ul>
+            <h4><a href="https://space.bilibili.com/432444813/" target="_blank">Copyright©编译中梦见未来</a></h4>
+        </footer>
+
+    </div>
+    
+    <div class="toolbar">
+        <div class="select red"></div>
+        <div class="select blue"></div>
+        <div class="select green"></div>
+        <div class="select pink"></div>
+    </div>
+
+    <script>
+        // 获取到所有的样式选择按钮
+        let selects = document.querySelectorAll('.select');
+        // 获取到根元素的样式
+        let rootStyle = document.querySelector(':root').style;
+        // 循环选择按钮并且绑定点击事件
+        selects.forEach(element => {
+            element.addEventListener('click', function (e) {
+                // 获取到当前按钮的color属性
+                let bgStyle = window.getComputedStyle(this, null);
+                let bgColor = bgStyle.getPropertyValue("color");
+                // 将color属性赋值给根元素的自定义变量
+                rootStyle.setProperty('--base-color', bgColor);
+            })
+        });
+    </script>
+</body>
+
+</html>

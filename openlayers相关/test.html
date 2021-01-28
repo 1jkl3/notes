@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test" contenteditable>
+        <div
+            style="background-color: aqua;color: brown;display: inline-block;padding: 10px;box-sizing: border-box;margin: 10px;">
+            <div style="display: flex;justify-content: center;align-items: center;">
+                <img style="height: 50px;width: 50px;" src="../hpjd/img/banner.jpg" alt="">
+                <div style="height: 50px;width: 80px;">
+                    <p style="font-size: 20px;margin: 0;">我是测试代码</p>
+                </div>
+            </div>
+        </div><br/>
+        <!-- <span contenteditable="true" style="padding: 0 20px;outline: none;"></span> -->
+    </div>
+    <div id="div1"></div>
+    <!-- <script src="https://cdn.bootcdn.net/ajax/libs/wangEditor/3.1.1/wangEditor.min.js"></script> -->
+    <script src="./wangEditor.js"></script>
+    <script type="text/javascript">
+        let html = `<div style="background-color: aqua;color: brown;display: inline-block;padding: 10px;box-sizing: border-box;">
+                <div  style="display: flex;justify-content: center;align-items: center;">
+                  <img style="height: 50px;width: 50px;" src="../hpjd/img/banner.jpg" alt="">
+                  <div style="height: 50px;width: 80px;">
+                    <p style="font-size: 20px;margin: 0;">我是测试代码</p>
+                  </div>
+                </div>
+              </div><br/>\n`;
+        console.log(window);
+        const E = window.wangEditor;
+        const editor = new E('#div1')
+        console.log(editor);
+        editor.create()
+        editor.txt.html(html) // 重新设置编辑器内容
+    </script>
+</body>
+
+</html>
