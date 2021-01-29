@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-01-29 09:10:08
+ * @LastEditTime: 2021-01-29 15:23:06
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \vue-js\src\plugin\ol-plugin\core\utils.js
+ */
 // import Feature from "ol/feature";
 
 /**
@@ -56,6 +64,7 @@ function overlayPoistion(pixel, w, h, target) {
     }
     return offset;
 }
+
 export {
     computeDirection,
     pointInLine,

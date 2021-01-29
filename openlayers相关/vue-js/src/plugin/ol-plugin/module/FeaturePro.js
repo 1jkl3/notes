@@ -1,22 +1,26 @@
-/**
- * 原型对象类 
- * @description 申明为被继承类 封装为遮盖物基础结构 公共部分代码
+/*
+ * @Author: your name
+ * @Date: 2021-01-29 09:10:08
+ * @LastEditTime: 2021-01-29 10:55:22
+ * @LastEditors: Please set LastEditors
+ * @Description: 申明为被继承类 封装为遮盖物基础结构 公共部分代码
+ * @FilePath: \vue-js\src\utils\module\FeaturePro.js
  */
 import {
     defaultStyle,
     Geometrys
-} from '@/utils/core/config';
+} from '../core';
 import Feature from 'ol/Feature';
-export default class featurePro {
+export default class FeaturePro {
     constructor(props) {
-        this.id = props.id;
+        this.id = props.id || Date.now();
         this.name = props.name;
         this.coord = props.coord;
-        this.feature = props.feature;
+        this.layer = props.layer;
+        this.features = [];
         this.time = props.time;
         this.icon = props.icon;
         this.text = props.text;
-        this.layer = props.layer;
     }
     /**
      * 创建图形
@@ -46,6 +50,13 @@ export default class featurePro {
         })
         feature.setStyle(featureType === "Icon" ? defaultStyle[StyleType](srcName, text) : defaultStyle[StyleType](text))
         this.layer.getSource().addFeature(feature);
+        this.features.push({
+            id: featureId,
+            feature
+        })
         return feature;
+    }
+    getFeatureById(id) {
+        return this.features.find(item => item.id === id);
     }
 }

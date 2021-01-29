@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-01-29 09:10:08
+ * @LastEditTime: 2021-01-29 09:37:29
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \vue-js\src\plugin\ol-plugin\module\Track.js
+ */
 /**
  * 轨迹类
  */
@@ -7,9 +15,9 @@ import { defaultStyle,ActiveStyle } from "../core/config";
 import {
     getCoordinates
 } from "../core/utils";
-import featurePro from "./FeaturePro";
+import FeaturePro from "./FeaturePro";
 
-export default class Tarck extends featurePro {
+export default class Tarck extends FeaturePro {
     constructor(props) {
         super(props)
         this.times = [{

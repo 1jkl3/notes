@@ -1,3 +1,11 @@
+/*
+ * @Author: duhu
+ * @Date: 2021-01-29 09:10:08
+ * @LastEditTime: 2021-01-29 15:40:03
+ * @LastEditors: Please set LastEditors
+ * @Description: 地图总控 创建地图及图层（配合CustomLayer类）不包括地图上个的图形
+ * @FilePath: \vue-js\src\utils\module\FeaturePro.js
+ */
 // 样式引入
 import 'ol/ol.css';
 // 绘制
@@ -14,35 +22,29 @@ import Overlay from 'ol/Overlay';
 import {
     dataSource,
     defaultViewOptions
-} from '@/utils/core/config';
+} from './core';
 import {
     defaults as InteractionDefaults
 } from 'ol/interaction';
-/**
- * @description 地图总控
- * @function 创建地图及图层（配合CustomLayer类）不包括地图上个的图形
- */
+
 export default class BaseMap {
-    static plugins = {};
+    // static plugins = {};
 
     // 单例
-    static instance = null;
-    static getInstance(data) {
-        if (!BaseMap.instance) {
-            BaseMap.instance = new BaseMap(data);
-        }
-        return BaseMap.instance;
-    }
+    // static instance = null;
+    // static getInstance(data) {
+    //     if (!BaseMap.instance) {
+    //         BaseMap.instance = new BaseMap(data);
+    //     }
+    //     return BaseMap.instance;
+    // }
     /**
      * @param {String} key 唯一
-     * @param {String} tile 默认瓦片实例
      * @param {Map} defaultMap 默认地图实例
      * @param {Document} defaultTarget 默认绑定dom元素
      * @param {Array<String>} defaultCenter 默认中心点
      * @param {Tile} defaultBaseLayer 默认原始底图
-     * @param {events} defaultInteractions 默认交互列表
      * @param {Overlay} defaultOverlays 默认弹窗列表
-     * @param {Array<VectorLayer>} defaultLayers 默认图层列表
      */
     constructor(props) {
         this.key = props.key || null;
@@ -50,9 +52,17 @@ export default class BaseMap {
         this.defaultTarget = props.target;
         this.defaultCenter = props.center || [118.14161001864854, 27.362891709786183];
         this.defaultBaseLayer = null;
-        this.defaultOverlays = [];
+        // this.defaultOverlays = [];
         this.createMap.call(this);
-        // this.craeteInteraction.call(this);
+        let self = this;
+        if(!props.isContextMenu){
+            self.closeContextMenu()
+        }
+        // new Proxy(props,{
+        //     set(target,key,value){
+                
+        //     }
+        // })
     }
     // 创建初始地图模型
     createMap() {
@@ -86,6 +96,12 @@ export default class BaseMap {
             view: new View(defaultViewOptions)
         })
     }
+    // 关闭右键监听
+    closeContextMenu() {
+        window.oncontextmenu = function (e) {
+            e.preventDefault()
+        }
+    }
     /**
      * 移动视角
      * @param {Array<coordinate>} center 坐标
@@ -100,22 +116,22 @@ export default class BaseMap {
             this.defaultMap.getView().setCenter(center)
         }
     }
-    
+
     /**
      * 创建窗口 popup
      * @param {DOMCLASS} target dom
      */
-    createOverlay(overlayId, target) {
-        let overlay = new Overlay({
-            element: target,
-            // position
-        })
-        this.defaultOverlays.push({
-            id: overlayId,
-            overlay
-        })
-        this.defaultMap.addOverlay(overlay)
-    }
+    // createOverlay(overlayId, target) {
+    //     let overlay = new Overlay({
+    //         element: target,
+    //         // position
+    //     })
+    //     this.defaultOverlays.push({
+    //         id: overlayId,
+    //         overlay
+    //     })
+    //     this.defaultMap.addOverlay(overlay)
+    // }
     // 清除
     destory() {
         // this.defaultMap

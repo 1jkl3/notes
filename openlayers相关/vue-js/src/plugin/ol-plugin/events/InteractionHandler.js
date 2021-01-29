@@ -1,5 +1,10 @@
-/**
- * 操作处理类 具体业务实现
+/*
+ * @Author: your name
+ * @Date: 2021-01-29 09:21:38
+ * @LastEditTime: 2021-01-29 16:33:22
+ * @LastEditors: Please set LastEditors
+ * @Description: 操作处理类
+ * @FilePath: \vue-js\src\utils\events\event.js
  */
 import {
     singleClick,
@@ -12,24 +17,26 @@ import {
     DragPan
 } from 'ol/interaction';
 import {
-    drawStyle
+    defaultStyle
 } from '../core/config';
 // import {
 //     createBox
 // } from 'ol/interaction/Draw';
 const events = {
-    "click": singleClick,
+    "select": singleClick,
     "dbClick": doubleClick,
     "move": pointerMove
 }
 export default class InteractionHandler {
     constructor(props) {
-        this.id = props.id;
+        this.id = props.id || Date.now();
         this.name = props.name;
         this.map = props.map;
         this.layer = props.layer;
         this.Interaction = null;
+
     }
+
     /**
      * 关闭地图拖拽
      * @param {Boolean} off 控制拖拽开关
@@ -44,44 +51,41 @@ export default class InteractionHandler {
     /**
      * 绘制图形
      * @param {String} type 图形类型
+     * @param {Object} content { text,src }
      * @param {Function<Event<Feature,Draw,string>} callback 回调函数
      */
-    onDraw(type = "Piont", callback) {
-        // if(this.Interaction) this.map.removeInteraction(this.Interaction);
+    onDraw(type = "Piont", src, callback) {
         let self = this;
         this.Interaction = new Draw({
-            // source: self.layer.getSource(),
             type,
-            style: drawStyle[type],
-            // freehand: false,
+            style: type === 'Icon' ? defaultStyle[type](src) : defaultStyle[type](),
             // geometryFunction: type === "Circle" ? createBox() : ""
         })
         this.Interaction.on("drawend", (e) => {
-            e.feature.setStyle(drawStyle[type])
-            self.layer.getSource().addFeature(e.feature)
+            
             callback && callback(e, self)
-            // this.map.removeInteraction(this.Interaction)
         })
         this.map.addInteraction(this.Interaction);
     }
     // feature事件
-    onSelect(type = "click", callback) {
-        if (this.Interaction) this.map.removeInteraction(this.Interaction);
+    onSelect(type = "select", callback) {
+        // 解决样式丢失问题
+        let style = null;
         let select = new Select({
             condition: events[type],
             multi: false,
-            // filter: (feature, layer) => {
-            //     if (this.layer.get("id") === layer.id) {
-            //         return true;
-            //     } else {
-            //         return false;
-            //     }
-            // }
+            filter: (feature, layer) => {
+                style = feature.getStyle();
+                if (this.layer.get("id") === layer.get("id")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         });
-        select.on("click", (e) => {
-            console.log(e);
+        select.on('select', (e) => {
+            e.selected[0] && e.selected[0].setStyle(style);
             callback && callback(e, this)
-            // this.map.removeInteraction(this.Interaction)
         })
         this.map.addInteraction(select);
         this.Interaction = select;
@@ -96,7 +100,6 @@ export default class InteractionHandler {
      * 清除当前图层中的图画及交互
      */
     clearDraw() {
-        // this.layer.getSource().clear();
         this.map.removeInteraction(this.Interaction);
     }
 }

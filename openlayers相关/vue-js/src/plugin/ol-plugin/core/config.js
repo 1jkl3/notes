@@ -63,8 +63,14 @@ export const defaultStyle = {
     "LineString": (text) => {
         return new Style({
             stroke: new Stroke({
-                color: "#fff",
+                color: "#000",
                 width: 2,
+            }),
+            image: new CircleStyle({
+                radius: 10,
+                fill: new Fill({
+                    color: "red"
+                })
             }),
             text: text && new Text({
                 text,
@@ -75,22 +81,31 @@ export const defaultStyle = {
     "Polygon": (text) => {
         return new Style({
             stroke: new Stroke({
-                color: "#fff",
+                color: "#ff6688",
                 width: 2
+            }),
+            image: new CircleStyle({
+                radius: 2,
+                fill: new Fill({
+                    color: "red"
+                })
             }),
             fill: new Fill({
                 color: "#ff6688"
             }),
             text: text && new Text({
                 text,
-                offsetY: 18
+                textAlign:"center",
             })
         })
     },
     "Circle": (text) => {
         return new Style({
             stroke: new Stroke({
-                color: "#fff"
+                color: "#000"
+            }),
+            fill: new Fill({
+                color: "#ff6688"
             }),
             image: new CircleStyle({
                 radius: 10,
@@ -98,71 +113,6 @@ export const defaultStyle = {
             text: text && new Text({
                 text,
                 offsetY: 18
-            })
-        })
-    }
-}
-export const drawStyle = {
-    "Point": (content) => {
-        return new Style({
-            stroke: new Stroke({
-                color: "#fff"
-            }),
-            image: new CircleStyle({
-                radius: 10,
-                fill: new Fill({
-                    color: "red"
-                })
-            })
-        })
-    },
-    "LineString": (text) => {
-        return new Style({
-            stroke: new Stroke({
-                color: "#fff",
-                width: 2,
-            }),
-            fill: new Fill({
-                color: "#ff6688"
-            }),
-            image: new CircleStyle({
-                radius: 4,
-                fill: new Fill({
-                    color: "red"
-                })
-            })
-        })
-    },
-    "Polygon": (text) => {
-        return new Style({
-            stroke: new Stroke({
-                color: "#fff",
-                width: 2
-            }),
-            fill: new Fill({
-                color: "#ff6688"
-            }),
-            image: new CircleStyle({
-                radius: 4,
-                fill: new Fill({
-                    color: "red"
-                })
-            })
-        })
-    },
-    "Circle": (text) => {
-        return new Style({
-            stroke: new Stroke({
-                color: "#fff"
-            }),
-            fill: new Fill({
-                color: "rgba(0,0,0,0.5)"
-            }),
-            image: new CircleStyle({
-                radius: 4,
-                fill: new Fill({
-                    color: "red"
-                })
             })
         })
     }
@@ -197,6 +147,7 @@ export const Geometrys = {
     "MultiLineString": new MultiLineString([]),
     "MultiPolygon": new MultiPolygon([])
 }
+// View公共配置
 export const defaultViewOptions = {
     center: [118.14161001864854, 27.362891709786183],
     projection: "EPSG:4326",
