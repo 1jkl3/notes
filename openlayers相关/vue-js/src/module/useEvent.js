@@ -1,54 +1,67 @@
 /*
  * @Author: duhu
  * @Date: 2021-01-29 09:44:19
- * @LastEditTime: 2021-01-29 16:55:39
+ * @LastEditTime: 2021-01-29 17:59:56
  * @LastEditors: Please set LastEditors
  * @Description: 事件 业务逻辑层
  * @FilePath: \vue-js\src\module\useEvent.js
  */
 import { useMap, useLayer } from './index'
-import { InteractionHandler, getCoordinates, defaultStyle } from '@/plugin/ol-plugin';
+import { InteractionHandler, defaultStyle } from '@/plugin/ol-plugin';
 let hander = null;
 export const useEvent = (option) => {
     option.map = useMap().defaultMap;
     option.layer = useLayer().currentLayer;
+    option.name = '自定义事件'
     if (!hander) {
         hander = new InteractionHandler(option)
     }
-    // 注册绘制图形事件
-    // useEventDraw(option.type)
     return hander
 }
 // 注册交互事件
-export const useEventSelect = (type) => {
-    !hander && (hander = useEvent())
+export const useEventSelect = (type,callback) => {
+    !hander && useEvent({})
     hander.onSelect(type, (e) => {
-        console.log(e.selected[0]);
-        // console.log(e.selected[0].getGeometry());
+        callback && callback(e)
     })
 }
+// 点击
+export const useEventSelectClick = () => {
+    useEventSelect('select',(e)=>[
+
+    ])
+}
+// 触动
+export const useEventSelectMove = () => {
+    useEventSelect('move',(e)=>[
+
+    ])
+}
+// 双击
+export const useEventSelectDBclick = () => {
+    useEventSelect('dbClick',(e)=>[
+
+    ])
+}
 // 注册绘制图形事件
-export const useEventDraw = (type, src) => {
-    !hander && (hander = useEvent())
+export const useEventDraw = (type, src, callback) => {
+    !hander && useEvent({})
     src = src ? src : null;
-    // let src = content && content.src ? content.src : null
-    // let text = content && content.text ? content.text : null
-    hander.onDraw(type, src, (e,self) => {
-        // if (type === 'Icon') {
-        //     e.feature.setStyle(defaultStyle[type](src, text))
-        // } else {
-        //     e.feature.setStyle(defaultStyle[type](text))
-        // }
-        if(confirm()){
-            self.layer.getSource().addFeature(e.feature)
-        }else{
-            console.log(e.feature.getStyle());
+    hander.onDraw(type, src, (e, self) => {
+        let option = {
+            feature: e.feature,
+            layerSource: self.layer.getSource(),
+            type,
+            src,
+            text: ''
         }
-        // type === 'Icon' ? e.feature.setStyle(defaultStyle[type](content.src, content.text)) : e.feature.setStyle(defaultStyle[type](content.text));
-        // console.log(e);
-        // console.log(getCoordinates(e.feature));
-        // unuseEvent()asdas
+        callback && callback(option)
     })
+}
+// 配合异步添加样式
+export const asyncStyleFun = ({ feature, layerSource, type, src, text = '' }) => {
+    type === 'Icon' ? feature.setStyle(defaultStyle[type](src, text)) : feature.setStyle(defaultStyle[type](text));
+    layerSource.addFeature(feature)
 }
 // 清除事件
 export const unuseEvent = () => {

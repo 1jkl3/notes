@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-29 09:10:08
- * @LastEditTime: 2021-01-29 15:43:03
+ * @LastEditTime: 2021-01-29 17:43:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-js\src\views\About.vue
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { useEvent, useEventDraw, destory } from "@/module";
+import { useEventDraw, asyncStyleFun, destory } from "@/module";
 import chatMap from "@/components/chatMap";
 export default {
   name: "About",
@@ -27,11 +27,11 @@ export default {
   },
   methods: {
     select() {
-      useEvent({
-        name: "自定义事件",
+      // Polygon Circle
+      useEventDraw("LineString", null, (opts) => {
+        // opts.text = "哈哈";
+        asyncStyleFun(opts);
       });
-      // Polygon Circle 
-      useEventDraw("Point",null);
     },
     inse() {
       destory();
