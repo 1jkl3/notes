@@ -1,7 +1,7 @@
 /*
  * @Author: duhu
  * @Date: 2021-01-29 09:44:19
- * @LastEditTime: 2021-01-29 16:33:48
+ * @LastEditTime: 2021-01-29 16:55:39
  * @LastEditors: Please set LastEditors
  * @Description: 事件 业务逻辑层
  * @FilePath: \vue-js\src\module\useEvent.js
@@ -47,8 +47,7 @@ export const useEventDraw = (type, src) => {
         // type === 'Icon' ? e.feature.setStyle(defaultStyle[type](content.src, content.text)) : e.feature.setStyle(defaultStyle[type](content.text));
         // console.log(e);
         // console.log(getCoordinates(e.feature));
-
-        // unuseEvent()
+        // unuseEvent()asdas
     })
 }
 // 清除事件
