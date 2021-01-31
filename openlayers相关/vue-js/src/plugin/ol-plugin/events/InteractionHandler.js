@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-29 09:21:38
- * @LastEditTime: 2021-01-29 16:33:22
+ * @LastEditTime: 2021-01-31 02:38:27
  * @LastEditors: Please set LastEditors
  * @Description: 操作处理类
  * @FilePath: \vue-js\src\utils\events\event.js
@@ -34,7 +34,6 @@ export default class InteractionHandler {
         this.map = props.map;
         this.layer = props.layer;
         this.Interaction = null;
-
     }
 
     /**
@@ -62,7 +61,7 @@ export default class InteractionHandler {
             // geometryFunction: type === "Circle" ? createBox() : ""
         })
         this.Interaction.on("drawend", (e) => {
-            
+
             callback && callback(e, self)
         })
         this.map.addInteraction(this.Interaction);
@@ -91,7 +90,7 @@ export default class InteractionHandler {
         this.Interaction = select;
     }
     // 底图事件
-    onEvent(type = "singleClick", callback) {
+    onEvent(callback, type = "singleClick") {
         this.map.on(type, (e) => {
             callback && callback(e);
         })

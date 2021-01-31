@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-01-29 09:10:08
- * @LastEditTime: 2021-01-29 09:37:29
- * @LastEditors: your name
+ * @LastEditTime: 2021-01-31 02:36:01
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-js\src\plugin\ol-plugin\module\Track.js
  */
@@ -10,8 +10,13 @@
  * 轨迹类
  */
 
-import { LineString } from "ol/geom";
-import { defaultStyle,ActiveStyle } from "../core/config";
+import {
+    LineString
+} from "ol/geom";
+import {
+    defaultStyle,
+    ActiveStyle
+} from "../core/config";
 import {
     getCoordinates
 } from "../core/utils";
@@ -20,28 +25,31 @@ import FeaturePro from "./FeaturePro";
 export default class Tarck extends FeaturePro {
     constructor(props) {
         super(props)
+        this.time = props.time;
+        this.coord = props.coord;
+        this.text = props.text;
         this.times = [{
-            date:props.time,
-            coord:props.coord
+            date: props.time,
+            coord: props.coord
         }];
         this._createModule()
     }
     _createModule() {
-        super.feature = new LineString(super.coord);
-        super.feature.setStyle(defaultStyle["LineString"](super.text))
+        this.feature = new LineString(this.coord);
+        this.feature.setStyle(defaultStyle["LineString"](this.text))
     }
     // 添加新的coord到feature中 动态绘制
-    addCoordinate(coord,time) {
+    addCoordinate(coord, time) {
         this.times.push({
-            date:time,
+            date: time,
             coord
         });
         // 从小到大排序
-        this.times.sort((a,b)=>a.date - b.date);
-        let coords = getCoordinates(super.feature);
+        this.times.sort((a, b) => a.date - b.date);
+        let coords = getCoordinates(this.feature);
         coords = coords.concat(coord);
-        super.feature.setCoordinates(coords);
+        this.feature.setCoordinates(coords);
     }
-    updataStyle(){}
+    updataStyle() {}
 
 }

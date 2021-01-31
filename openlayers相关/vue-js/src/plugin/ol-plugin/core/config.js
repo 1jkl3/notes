@@ -49,7 +49,7 @@ export const defaultStyle = {
                 color: "#fff"
             }),
             image: new CircleStyle({
-                radius: 10,
+                radius: 5,
                 fill: new Fill({
                     color: "red"
                 })
@@ -67,7 +67,7 @@ export const defaultStyle = {
                 width: 2,
             }),
             image: new CircleStyle({
-                radius: 10,
+                radius: 5,
                 fill: new Fill({
                     color: "red"
                 })
@@ -85,7 +85,7 @@ export const defaultStyle = {
                 width: 2
             }),
             image: new CircleStyle({
-                radius: 2,
+                radius: 5,
                 fill: new Fill({
                     color: "red"
                 })
@@ -95,7 +95,7 @@ export const defaultStyle = {
             }),
             text: text && new Text({
                 text,
-                textAlign:"center",
+                textAlign: "center",
             })
         })
     },
@@ -108,7 +108,7 @@ export const defaultStyle = {
                 color: "#ff6688"
             }),
             image: new CircleStyle({
-                radius: 10,
+                radius: 5,
             }),
             text: text && new Text({
                 text,
@@ -139,13 +139,13 @@ export const dataSource = {
 }
 // 公共几何图形库
 export const Geometrys = {
-    "Point": new Point([]),
-    "LineString": new LineString([]),
-    "Polygon": new Polygon([]),
-    "Circle": new Circle([]),
-    "MultiPoint": new MultiPoint([]),
-    "MultiLineString": new MultiLineString([]),
-    "MultiPolygon": new MultiPolygon([])
+    "Point": () => new Point([]),
+    "LineString": () => new LineString([]),
+    "Polygon": () => new Polygon([]),
+    "Circle": () => new Circle([]),
+    "MultiPoint": () => new MultiPoint([]),
+    "MultiLineString": () => new MultiLineString([]),
+    "MultiPolygon": () => new MultiPolygon([])
 }
 // View公共配置
 export const defaultViewOptions = {

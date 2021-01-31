@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-29 09:10:08
- * @LastEditTime: 2021-01-29 15:26:37
+ * @LastEditTime: 2021-01-31 03:00:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-js\src\components\chatMap.vue
@@ -18,7 +18,8 @@ import {
   useEvent,
   useEventDraw,
   unuseEvent,
-  useEventSelect
+  useEventSelect,
+  useMeasure
 } from "@/module";
 // import { drawStyle } from '@/utils/core/config';
 // import {Draw} from 'ol/interaction'
@@ -31,12 +32,14 @@ export default {
   mounted() {
     useMap();
     useLayer();
+    useMeasure()
     // console.log(layer);
-    let feature = useFeature({
-      id:'1234',
-      name: "自定义特色",
-    });
-    feature.createFeature(123, [119.21277701083604, 27.895728623848683],'测试');
+    // let feature = useFeature({
+    //   id:'1234',
+    //   name: "自定义特色",
+    // });
+    // feature.createFeature(123, [119.21277701083604, 27.895728623848683],'测试');
+    // feature.createFeature(1234, [112.21277701083604, 27.895728623848683],'测试');
     // useEvent({
     //   name: "自定义事件",
     // });

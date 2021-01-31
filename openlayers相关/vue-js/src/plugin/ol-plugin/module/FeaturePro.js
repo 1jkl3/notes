@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-29 09:10:08
- * @LastEditTime: 2021-01-29 10:55:22
+ * @LastEditTime: 2021-01-31 02:58:50
  * @LastEditors: Please set LastEditors
  * @Description: 申明为被继承类 封装为遮盖物基础结构 公共部分代码
  * @FilePath: \vue-js\src\utils\module\FeaturePro.js
@@ -15,12 +15,8 @@ export default class FeaturePro {
     constructor(props) {
         this.id = props.id || Date.now();
         this.name = props.name;
-        this.coord = props.coord;
         this.layer = props.layer;
         this.features = [];
-        this.time = props.time;
-        this.icon = props.icon;
-        this.text = props.text;
     }
     /**
      * 创建图形
@@ -40,7 +36,7 @@ export default class FeaturePro {
             console.error("The feature already exists")
             return;
         }
-        let geometry = Geometrys[featureType];
+        let geometry = Geometrys[featureType]();
         geometry.setCoordinates(coord)
         let StyleType = featureType === "MultiLineString" ? "LineString" : featureType === "MultiPoint" ? "Point" : featureType === "MultiPolygon" ? "Polygon" : featureType;
         let feature = new Feature({
@@ -58,5 +54,8 @@ export default class FeaturePro {
     }
     getFeatureById(id) {
         return this.features.find(item => item.id === id);
+    }
+    getFeatures(){
+        return this.features;
     }
 }

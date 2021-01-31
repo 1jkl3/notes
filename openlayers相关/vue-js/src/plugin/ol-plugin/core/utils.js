@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-01-29 09:10:08
- * @LastEditTime: 2021-01-29 15:23:06
- * @LastEditors: your name
+ * @,@LastEditTime: ,: 2021-02-01 01:56:19
+ * @,@LastEditors: ,: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-js\src\plugin\ol-plugin\core\utils.js
  */
@@ -54,13 +54,14 @@ function pointInLine(line, point) {
  * @param {Number} h dom高度
  * @param {HTMLDocument} target map地图所在dom
  */
-function overlayPoistion(pixel, w, h, target) {
-    const offset = [-10, -10];
-    if (pixel[0] + w - 50 > target.offsetLeft + target.offsetWidth) {
-        offset[0] = -w
+function overlayPoistion(pixel, w, h, target, offset) {
+    // const offset = [-(w), -(h + 5)];
+    // const offset = [-w * 2 + 10, -(h - 10)];
+    if (pixel[0] + w > target.offsetWidth) {
+        offset[0] = -(w)
     }
-    if (pixel[1] + h - 50 > target.offsetTop + target.offsetHeigth) {
-        offset[1] = -h
+    if (pixel[1] + h > target.offsetHeight) {
+        offset[1] = -(h)
     }
     return offset;
 }

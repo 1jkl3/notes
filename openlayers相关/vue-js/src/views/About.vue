@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-29 09:10:08
- * @LastEditTime: 2021-01-29 17:43:03
+ * @LastEditTime: 2021-01-31 02:55:00
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-js\src\views\About.vue
@@ -28,10 +28,10 @@ export default {
   methods: {
     select() {
       // Polygon Circle
-      useEventDraw("LineString", null, (opts) => {
-        // opts.text = "哈哈";
-        asyncStyleFun(opts);
-      });
+      // useEventDraw("LineString", null, (opts) => {
+      //   // opts.text = "哈哈";
+      //   asyncStyleFun(opts);
+      // });
     },
     inse() {
       destory();
