@@ -1,8 +1,8 @@
 /*
  * @Author: duhu
  * @Date: 2021-01-31 01:32:49
- * @,@LastEditTime: ,: 2021-02-01 01:25:14
- * @,@LastEditors: ,: Please set LastEditors
+ * @LastEditTime: 2021-02-01 10:39:34
+ * @LastEditors: Please set LastEditors
  * @Description: 测量工具
  * @FilePath: \vue-js\src\module\useMeasure.js
  */
@@ -26,10 +26,10 @@ export const useMeasure = (measureType) => {
         layer,
         name: '测量工具'
     })
+    // 绘制测量控件
     measure.onDraw((e) => {
-        // console.log(e);
+        console.log(e.length);
     },measureType)
-    measure.onEvent((e)=>{
-        // console.log(e);
-    },'pointermove')
+    // hover移动点击开始dom控件
+    measure.onEvent()
 }

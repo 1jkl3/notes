@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-01-31 01:40:05
- * @,@LastEditTime: ,: 2021-02-01 01:45:37
- * @,@LastEditors: ,: Please set LastEditors
+ * @LastEditTime: 2021-02-01 11:06:01
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-js\src\plugin\ol-plugin\events\Measure.js
  */
@@ -50,26 +50,9 @@ export default class Measure extends InteractionHandler {
      * @param {*} id dom的id
      * @param {string} text 
      */
-    createHelpDom(id = 'help', text) {
-        this.helpTooltipElement = document.createElement('span');
-        this.helpTooltipElement.setAttribute("id", id)
-        this.helpTooltipElement.style.padding = '2px 5px'
-        this.helpTooltipElement.style.fontSize = '12px'
-        this.helpTooltipElement.style.display = 'block'
-        this.helpTooltipElement.style.backgroundColor = 'rgba(0,0,0,0.5)'
-        this.helpTooltipElement.style.color = '#FFF'
-        this.helpTooltipElement.style.textAlign = 'center'
-        this.helpTooltipElement.style.position = 'absolute'
-        this.helpTooltipElement.innerText = text
-        document.body.appendChild(this.helpTooltipElement)
-    }
-    /**
-     * @description：创建基础dom
-     * @param {type} text 添加到dom中的文字
-     */
-    createDom(text = '点击开始') {
-        let div = document.createElement('span');
-        div.setAttribute("id", 'custom')
+    createHelpDom(id = 'help', text = '') {
+        let div = document.createElement('div');
+        div.setAttribute("id", id)
         div.style.padding = '2px 5px'
         div.style.fontSize = '10px'
         div.style.display = 'block'
@@ -81,6 +64,23 @@ export default class Measure extends InteractionHandler {
         return div
     }
     /**
+     * @description：创建基础dom
+     * @param {type} text 添加到dom中的文字
+     */
+    createDom(text = '点击开始') {
+        this.helpTooltipElement = document.createElement('div');
+        this.helpTooltipElement.setAttribute("id", 'custom')
+        this.helpTooltipElement.style.padding = '2px 5px'
+        this.helpTooltipElement.style.fontSize = '10px'
+        this.helpTooltipElement.style.display = 'block'
+        this.helpTooltipElement.style.backgroundColor = 'rgba(0,0,0,0.5)'
+        this.helpTooltipElement.style.color = '#FFF'
+        this.helpTooltipElement.style.textAlign = 'center'
+        this.helpTooltipElement.innerText = text
+        document.body.appendChild(this.helpTooltipElement)
+        return this.helpTooltipElement
+    }
+    /**
      * @description：创建overlay
      * @param {id} id dom的id 
      * @param {Coordinate} coord 经纬度
@@ -89,8 +89,8 @@ export default class Measure extends InteractionHandler {
         let overlay = this.helpOverlay.getOverlayById(id)
         if (!overlay) {
             this.helpOverlay.createHelpOverlay(id, id, coord)
-        }else{
-            this.helpOverlay.refreshPosition(id,id,coord)
+        } else {
+            this.helpOverlay.refreshPosition(id, id, coord)
         }
     }
     /**
@@ -100,36 +100,39 @@ export default class Measure extends InteractionHandler {
      * @return {*}
      */
     onDraw(callback, type = "LineString") {
-        let self = this;
+        let self = this, helpDom;
         this.Interaction = new Draw({
             type,
             style: defaultStyle[type]()
         })
         // 开始
         this.Interaction.on("drawstart", (e) => {
-            let sketch = e.feature
-            // if(sketch.getGeometry().getType() === 'LineString') {
-            //     this.featurePro.createFeature(Date.now(), sketch.getGeometry().getLastCoordinate())
-            // }
-            // this.createDom('test','ad',sketch.getGeometry().getLastCoordinate())
+            let sketch = e.feature, tooltip;
+            // 创建计算长度dom
+            helpDom = this.createHelpDom('help' + this.helpOverlay.defaultOverlays.length);
+            let id = helpDom.getAttribute('id');
+            this.helpOverlay.createHelpOverlay(id, id, sketch.getGeometry().getLastCoordinate())
+            this.helpTooltipElement.innerHTML = '点击结束'
             this.listener = sketch.getGeometry().on("change", function (params) {
                 let geom = params.target
                 if (geom.getType() === 'LineString') {
-                    self.tooltip = self._formatLength(geom);
+                    tooltip = self._formatLength(geom);
                 } else if (geom.getType() === 'Polygon') {
-                    self.tooltip = self._formatArea(geom);
+                    tooltip = self._formatArea(geom);
                 }
-                // console.log(self.tooltip);
+                helpDom.innerHTML = tooltip
             })
         })
         // 结束
         this.Interaction.on("drawend", (e) => {
-            // if(e.feature.getGeometry().getType() === 'LineString') {
-            //     this.featurePro.createFeature(Date.now(), e.feature.getGeometry().getLastCoordinate())
-            // }
+            self.helpTooltipElement.innerHTML = '点击开始'
             e.feature.setStyle(defaultStyle[type]())
             self.layer.getSource().addFeature(e.feature)
-            callback && callback(e, self)
+            let options = {
+                feature: e.feature,
+                length: helpDom.innerHTML.split(' ')[0]
+            }
+            callback && callback(options)
         })
         this.map.addInteraction(this.Interaction);
     }
@@ -139,12 +142,11 @@ export default class Measure extends InteractionHandler {
      * @param {'singleclick' | 'doubleClick' | 'moveend' | 'pointermove' } type
      * @return {*}
      */
-    onEvent(callback, type = 'pointermove') {
+    onEvent(type = 'pointermove') {
         let dom = this.createDom();
         let id = dom.getAttribute('id');
         this.map.on(type, (e) => {
-            this.createHelpOverlay(id,e.coordinate)
-            callback && callback(e)
+            this.createHelpOverlay(id, e.coordinate)
         })
     }
     /**

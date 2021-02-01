@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-01-29 09:10:08
- * @,@LastEditTime: ,: 2021-02-01 01:56:19
- * @,@LastEditors: ,: Please set LastEditors
+ * @LastEditTime: 2021-02-01 11:02:14
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-js\src\plugin\ol-plugin\core\utils.js
  */
@@ -54,14 +54,25 @@ function pointInLine(line, point) {
  * @param {Number} h dom高度
  * @param {HTMLDocument} target map地图所在dom
  */
-function overlayPoistion(pixel, w, h, target, offset) {
+function overlayPoistion(pixel, rect, target, offset = [10, 10]) {
     // const offset = [-(w), -(h + 5)];
     // const offset = [-w * 2 + 10, -(h - 10)];
-    if (pixel[0] + w > target.offsetWidth) {
-        offset[0] = -(w)
+    // if (pixel[0] + w > target.offsetWidth) {
+    //     offset[0] = -(w)
+    // }
+    // if (pixel[1] + h > target.offsetHeight) {
+    //     offset[1] = -(h)
+    // }
+    if (target.clientWidth < pixel[0] + rect.w) {
+        console.log('x');
+        offset[0] = -(pixel[0] + rect.w - target.clientWidth)
     }
-    if (pixel[1] + h > target.offsetHeight) {
-        offset[1] = -(h)
+    console.log(pixel);
+    console.log(rect);
+    console.log('x',target.clientWidth,'y',target.clientHeight);
+    if (target.clientHeight < pixel[1] + rect.h) {
+        console.log('y');
+        offset[1] = -(pixel[1] + rect.h - target.clientHeight)
     }
     return offset;
 }

@@ -1,8 +1,8 @@
 /*
  * @Author: duhu
  * @Date: 2021-01-29 10:02:07
- * @,@LastEditTime: ,: 2021-02-01 01:43:21
- * @,@LastEditors: ,: Please set LastEditors
+ * @LastEditTime: 2021-02-01 11:08:53
+ * @LastEditors: Please set LastEditors
  * @Description: 封装窗口类
  * @FilePath: \vue-js\src\plugin\ol-plugin\overlay\customOverlay.js
  */
@@ -22,12 +22,15 @@ export default class CustomOverlay {
      * 创建窗口 popup
      * @param {DOMCLASS} target dom
      */
-    createOverlay(overlayId, target,coordinate) {
-        let dom = document.querySelector(target);
-        let position = overlayPoistion(coordinate,dom.height,dom.width,this.map.getTarget())
+    createOverlay(overlayId, target, coordinate) {
+        let dom = document.querySelector('#' + target);
+        let map = document.querySelector('#' + this.map.getTarget());
+        let rect = dom.getBoundingClientRect();
+        let offset = overlayPoistion(this.map.getPixelFromCoordinate(coordinate), rect, map)
         let overlay = new Overlay({
-            element: target,
-            position
+            element: dom,
+            position: coordinate,
+            offset
         })
         this.defaultOverlays.push({
             id: overlayId,
@@ -42,15 +45,11 @@ export default class CustomOverlay {
      * @param {*} position
      * @return {*}
      */
-    createHelpOverlay(overlayId, target,position) {
+    createHelpOverlay(overlayId, target, position) {
         let span = document.querySelector('#' + target);
-        let dom = span.getBoundingClientRect();
-        let map = document.querySelector('#' + this.map.getTarget());
-        let offset = overlayPoistion(this.map.getPixelFromCoordinate(position),dom.height,dom.width,map)
         let overlay = new Overlay({
             element: span,
-            position,
-            offset
+            position
         })
         this.defaultOverlays.push({
             id: overlayId,
@@ -58,12 +57,28 @@ export default class CustomOverlay {
         })
         this.map.addOverlay(overlay)
     }
+    removeOverlayById(id) {
+        let overlay = this.getOverlayById(id)
+        console.log(overlay);
+        this.map.removeOverlay(overlay.overlay)
+        this.defaultOverlays = this.defaultOverlays.filter(e => e.id !== id)
+    }
+    hiddenOverlayById(id) {
+        let overlay = this.getOverlayById(id)
+        let dom = overlay.overlay.getElement()
+        dom.style.visibility = 'hidden'
+    }
+    showOverlayById(id) {
+        let overlay = this.getOverlayById(id)
+        let dom = overlay.overlay.getElement()
+        dom.style.visibility = 'visible'
+    }
     /**
      * @description：根据id获取overlay
      * @,@param {type} id overlay id
      */
-    getOverlayById(id){
-        return this.defaultOverlays.find(e=>e.id === id)
+    getOverlayById(id) {
+        return this.defaultOverlays.find(e => e.id === id)
     }
     /**
      * @description：刷新overlay位置
@@ -71,13 +86,11 @@ export default class CustomOverlay {
      * @,@param {type} target I am argument target. 
      * @,@param {type} position I am argument position. 
      */
-    refreshPosition(overlayId,target,position){
+    refreshPosition(overlayId, target, position) {
         let span = document.querySelector('#' + target);
         let dom = span.getBoundingClientRect();
-        let map = document.querySelector('#' + this.map.getTarget());
-        let offset = overlayPoistion(this.map.getPixelFromCoordinate(position),dom.height,dom.width,map)
         let overlay = this.getOverlayById(overlayId);
         overlay.overlay.setPosition(position)
-        overlay.overlay.setOffset(offset)
+        overlay.overlay.setOffset([-dom.width / 2 + 2, -(dom.height + 10)])
     }
 }

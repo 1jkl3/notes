@@ -1,3 +1,11 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-01-29 09:10:08
+ * @LastEditTime: 2021-02-01 13:07:12
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \vue-js\src\views\Home.vue
+-->
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
