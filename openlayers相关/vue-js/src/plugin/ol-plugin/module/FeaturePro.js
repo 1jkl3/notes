@@ -16,18 +16,19 @@ export default class FeaturePro {
         this.id = props.id || Date.now();
         this.name = props.name;
         this.layer = props.layer;
+        this.map = props.map;
         this.features = [];
     }
     /**
      * 创建图形
      * @param {String} featureType 必选 要创建的feature类型
      * @param {Number || String} featureId 必选 赋予的id
-     * @param {Stirng} text 可选 文字内容
+     * @param {Stirng} content 可选 文字样式
      * @param {Array<Coordinate>} coord 必选 定位
      * @param {Stirng} srcName 可选 featureType为icon时需要传的参数 
      * @description srcName 数据为config.js中commonIcons对象所对应的value
      */
-    createFeature(featureId, coord, text = "", featureType = "Point", srcName) {
+    createFeature(featureId, coord, content = { text: '', radius: 0 }, featureType = "Point", srcName) {
         if (!featureId) {
             console.error("please add id to feature")
             return;
@@ -36,15 +37,15 @@ export default class FeaturePro {
             console.error("The feature already exists")
             return;
         }
-        let geometry = Geometrys[featureType]();
-        geometry.setCoordinates(coord)
+        let geometry = Geometrys[featureType](coord, content.radius);
         let StyleType = featureType === "MultiLineString" ? "LineString" : featureType === "MultiPoint" ? "Point" : featureType === "MultiPolygon" ? "Polygon" : featureType;
         let feature = new Feature({
             geometry,
             id: featureId,
             name: featureType
         })
-        feature.setStyle(featureType === "Icon" ? defaultStyle[StyleType](srcName, text) : defaultStyle[StyleType](text))
+        feature.setStyle(featureType === "Icon" ? defaultStyle[StyleType](srcName, content.text) : defaultStyle[StyleType](content.text))
+        console.log(feature);
         this.layer.getSource().addFeature(feature);
         this.features.push({
             id: featureId,
@@ -52,10 +53,20 @@ export default class FeaturePro {
         })
         return feature;
     }
+    /**
+    * 获取转换后单位的半径
+    * @param {Number} radius 以米为单位的半径的值
+    * @returns {Number} circleRadius 以投影的单位为单位的半径的值
+    */
+    conversionRadius(radius) {
+        let metersPerUnit = this.map.getView().getProjection().getMetersPerUnit();
+        let circleRadius = radius / metersPerUnit;
+        return circleRadius;
+    }
     getFeatureById(id) {
         return this.features.find(item => item.id === id);
     }
-    getFeatures(){
+    getFeatures() {
         return this.features;
     }
 }

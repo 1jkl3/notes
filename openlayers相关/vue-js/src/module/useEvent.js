@@ -1,25 +1,31 @@
 /*
  * @Author: duhu
  * @Date: 2021-01-29 09:44:19
- * @LastEditTime: 2021-01-29 17:59:56
- * @LastEditors: Please set LastEditors
+ * @,@LastEditTime: ,: 2021-02-04 22:10:45
+ * @,@LastEditors: ,: Please set LastEditors
  * @Description: 事件 业务逻辑层
  * @FilePath: \vue-js\src\module\useEvent.js
  */
-import { useMap, useLayer } from './index'
-import { InteractionHandler, defaultStyle } from '@/plugin/ol-plugin';
+import {
+    useMap,
+    useLayer
+} from './index'
+import {
+    InteractionHandler,
+    defaultStyle
+} from '@/plugin/ol-plugin';
 let hander = null;
 export const useEvent = (option) => {
-    option.map = useMap().defaultMap;
-    option.layer = useLayer().currentLayer;
-    option.name = '自定义事件'
     if (!hander) {
+        option.map = useMap().defaultMap;
+        option.layer = useLayer().currentLayer;
+        option.name = '自定义事件'
         hander = new InteractionHandler(option)
     }
     return hander
 }
 // 注册交互事件
-export const useEventSelect = (type,callback) => {
+export const useEventSelect = (type, callback) => {
     !hander && useEvent({})
     hander.onSelect(type, (e) => {
         callback && callback(e)
@@ -27,19 +33,19 @@ export const useEventSelect = (type,callback) => {
 }
 // 点击
 export const useEventSelectClick = () => {
-    useEventSelect('select',(e)=>[
+    useEventSelect('select', (e) => [
 
     ])
 }
 // 触动
 export const useEventSelectMove = () => {
-    useEventSelect('move',(e)=>[
+    useEventSelect('move', (e) => [
 
     ])
 }
 // 双击
 export const useEventSelectDBclick = () => {
-    useEventSelect('dbClick',(e)=>[
+    useEventSelect('dbClick', (e) => [
 
     ])
 }
@@ -59,7 +65,13 @@ export const useEventDraw = (type, src, callback) => {
     })
 }
 // 配合异步添加样式
-export const asyncStyleFun = ({ feature, layerSource, type, src, text = '' }) => {
+export const asyncStyleFun = ({
+    feature,
+    layerSource,
+    type,
+    src,
+    text = ''
+}) => {
     type === 'Icon' ? feature.setStyle(defaultStyle[type](src, text)) : feature.setStyle(defaultStyle[type](text));
     layerSource.addFeature(feature)
 }

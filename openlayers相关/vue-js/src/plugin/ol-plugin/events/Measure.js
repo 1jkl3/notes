@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-01-31 01:40:05
- * @LastEditTime: 2021-02-01 11:06:01
- * @LastEditors: Please set LastEditors
+ * @,@LastEditTime: ,: 2021-02-04 22:07:59
+ * @,@LastEditors: ,: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-js\src\plugin\ol-plugin\events\Measure.js
  */
@@ -68,6 +68,7 @@ export default class Measure extends InteractionHandler {
      * @param {type} text 添加到dom中的文字
      */
     createDom(text = '点击开始') {
+        if(this.helpTooltipElement) return this.helpTooltipElement
         this.helpTooltipElement = document.createElement('div');
         this.helpTooltipElement.setAttribute("id", 'custom')
         this.helpTooltipElement.style.padding = '2px 5px'
@@ -76,6 +77,7 @@ export default class Measure extends InteractionHandler {
         this.helpTooltipElement.style.backgroundColor = 'rgba(0,0,0,0.5)'
         this.helpTooltipElement.style.color = '#FFF'
         this.helpTooltipElement.style.textAlign = 'center'
+        this.helpTooltipElement.style.visibility = 'hidden'
         this.helpTooltipElement.innerText = text
         document.body.appendChild(this.helpTooltipElement)
         return this.helpTooltipElement
@@ -87,6 +89,7 @@ export default class Measure extends InteractionHandler {
      */
     createHelpOverlay(id, coord) {
         let overlay = this.helpOverlay.getOverlayById(id)
+        this.helpTooltipElement.style.visibility = 'visible'
         if (!overlay) {
             this.helpOverlay.createHelpOverlay(id, id, coord)
         } else {
@@ -101,6 +104,9 @@ export default class Measure extends InteractionHandler {
      */
     onDraw(callback, type = "LineString") {
         let self = this, helpDom;
+        if(this.Interaction){
+            this.map.removeInteraction(this.Interaction)
+        }
         this.Interaction = new Draw({
             type,
             style: defaultStyle[type]()
@@ -143,6 +149,7 @@ export default class Measure extends InteractionHandler {
      * @return {*}
      */
     onEvent(type = 'pointermove') {
+        console.log("进入");
         let dom = this.createDom();
         let id = dom.getAttribute('id');
         this.map.on(type, (e) => {

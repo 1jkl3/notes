@@ -1,8 +1,8 @@
 /*
  * @Author: duhu
  * @Date: 2021-01-29 10:02:07
- * @LastEditTime: 2021-02-01 11:08:53
- * @LastEditors: Please set LastEditors
+ * @,@LastEditTime: ,: 2021-02-04 22:35:25
+ * @,@LastEditors: ,: Please set LastEditors
  * @Description: 封装窗口类
  * @FilePath: \vue-js\src\plugin\ol-plugin\overlay\customOverlay.js
  */
@@ -13,7 +13,6 @@ import {
 } from './core/utils'
 export default class CustomOverlay {
     constructor(props) {
-        this.id = props.id || Date.now();
         this.name = props.name || '动态窗口';
         this.map = props.map;
         this.defaultOverlays = [];

@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2021-01-31 00:04:39
- * @LastEditTime: 2021-01-31 02:32:47
- * @LastEditors: Please set LastEditors
+ * @,@LastEditTime: ,: 2021-02-04 22:31:10
+ * @,@LastEditors: ,: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-js\src\plugin\ol-plugin\module\Target.js
  */
@@ -21,15 +21,15 @@ export default class Target extends FeaturePro{
         this.text = props.text;
     }
     createModule(){
-        super.feature = new Point(this.coord);
-        super.feature.setStyle(defaultStyle["Icon"](this.icon,this.text))
+        this.feature = new Point(this.coord);
+        this.feature.setStyle(defaultStyle["Icon"](this.icon,this.text))
     }
     /**
      * 更新目标物位置信息
      */
     updateCoord(){}
     updataStyle(styleName){
-        console.log(super.feature.getStyle());
+        console.log(this.feature.getStyle());
         // let style = ActiveStyle[styleName]();
         // super.feature.setStyle(style);
     }

@@ -1,8 +1,8 @@
 /*
  * @Author: duhu
  * @Date: 2021-01-31 01:32:49
- * @LastEditTime: 2021-02-01 10:39:34
- * @LastEditors: Please set LastEditors
+ * @,@LastEditTime: ,: 2021-02-04 22:24:11
+ * @,@LastEditors: ,: Please set LastEditors
  * @Description: 测量工具
  * @FilePath: \vue-js\src\module\useMeasure.js
  */
@@ -18,9 +18,9 @@ import {
  * @return {*}
  */
 
-export const useMeasure = (measureType) => {
+export const useMeasure = (measureType,layerId) => {
     let map = useMap().defaultMap;
-    let layer = useLayer().currentLayer;
+    let layer = useLayer(layerId).currentLayer;
     let measure = Measure.getInstance({
         map,
         layer,

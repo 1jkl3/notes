@@ -6,11 +6,11 @@
  * @Description: In User Settings Edit
  * @FilePath: \vue-js\src\module\useFeature.js
  */
-import { useMap,useLayer } from './index'
+import { useMap, useLayer } from './index'
 import { FeaturePro, Target, Track } from '@/plugin/ol-plugin'
-export const useFeature = (option) => {
+export const useFeature = (layerId, option = { map: null, layer: null }) => {
     option.map = useMap().defaultMap;
-    option.layer = useLayer().currentLayer;
+    option.layer = useLayer(layerId).currentLayer;
     return new FeaturePro(option)
 }
 export const useTarget = (option) => {

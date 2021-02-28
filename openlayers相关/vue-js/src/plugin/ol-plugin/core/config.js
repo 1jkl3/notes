@@ -107,9 +107,6 @@ export const defaultStyle = {
             fill: new Fill({
                 color: "#ff6688"
             }),
-            image: new CircleStyle({
-                radius: 5,
-            }),
             text: text && new Text({
                 text,
                 offsetY: 18
@@ -139,13 +136,13 @@ export const dataSource = {
 }
 // 公共几何图形库
 export const Geometrys = {
-    "Point": () => new Point([]),
-    "LineString": () => new LineString([]),
-    "Polygon": () => new Polygon([]),
-    "Circle": () => new Circle([]),
-    "MultiPoint": () => new MultiPoint([]),
-    "MultiLineString": () => new MultiLineString([]),
-    "MultiPolygon": () => new MultiPolygon([])
+    "Point": (coord) => new Point(coord),
+    "LineString": (coord) => new LineString(coord),
+    "Polygon": (coord) => new Polygon(coord),
+    "Circle": (coord, radius) => new Circle(coord, radius),
+    "MultiPoint": (coord) => new MultiPoint(coord),
+    "MultiLineString": (coord) => new MultiLineString(coord),
+    "MultiPolygon": (coord) => new MultiPolygon(coord)
 }
 // View公共配置
 export const defaultViewOptions = {

@@ -8232,10 +8232,10 @@ vue@^2.6.11:
   resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.12.tgz?cache=0&sync_timestamp=1609359756799&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue%2Fdownload%2Fvue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha1-9evU+mvShpQD4pqJau1JBEVskSM=
 
-wangeditor@^4.6.5:
-  version "4.6.5"
-  resolved "https://registry.npm.taobao.org/wangeditor/download/wangeditor-4.6.5.tgz?cache=0&sync_timestamp=1611841622185&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fwangeditor%2Fdownload%2Fwangeditor-4.6.5.tgz#0a3ec391798e330d920c5ad8ce9cb7d3eae23bbe"
-  integrity sha1-Cj7DkXmOMw2SDFrYzpy30+riO74=
+wangeditor@^4.6.6:
+  version "4.6.6"
+  resolved "https://registry.npm.taobao.org/wangeditor/download/wangeditor-4.6.6.tgz#82e63ee86d11dfb117e1bae29ee2370bc4b7caba"
+  integrity sha1-guY+6G0R37EX4brinuI3C8S3yro=
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@babel/runtime-corejs3" "^7.11.2"
