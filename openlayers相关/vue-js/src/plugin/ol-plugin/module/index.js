@@ -1,16 +1,11 @@
 /*
  * @Author: your name
  * @Date: 2021-01-29 09:10:08
- * @LastEditTime: 2021-01-29 10:20:38
- * @LastEditors: your name
+ * @LastEditTime: 2021-03-07 20:11:25
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-js\src\plugin\ol-plugin\module\index.js
  */
-import Track from './Track';
-import Target from './Target';
-import FeaturePro from './FeaturePro';
-export {
-    FeaturePro,
-    Track,
-    Target
-}
+export { default as Track } from './Track';
+export { default as Target } from './Target';
+export { default as FeaturePro } from './FeaturePro';

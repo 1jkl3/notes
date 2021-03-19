@@ -1,11 +1,11 @@
 /*
- * @Author: your name
- * @Date: 2021-01-31 01:40:05
- * @,@LastEditTime: ,: 2021-02-04 22:07:59
- * @,@LastEditors: ,: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Author: duhu
+ * @Description: 测量工具
+ * @Date: 2021-02-01 22:53:33
+ * @LastEditTime: 2021-02-28 22:19:44
  * @FilePath: \vue-js\src\plugin\ol-plugin\events\Measure.js
  */
+
 import {
     getArea,
     getLength

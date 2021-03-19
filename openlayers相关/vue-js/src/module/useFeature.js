@@ -1,25 +1,37 @@
 /*
  * @Author: your name
  * @Date: 2021-01-29 09:44:10
- * @LastEditTime: 2021-01-29 15:19:49
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @LastEditTime: 2021-03-20 00:44:43
+ * @Description: 创建图形
  * @FilePath: \vue-js\src\module\useFeature.js
  */
 import { useMap, useLayer } from './index'
 import { FeaturePro, Target, Track } from '@/plugin/ol-plugin'
-export const useFeature = (layerId, option = { map: null, layer: null }) => {
-    option.map = useMap().defaultMap;
-    option.layer = useLayer(layerId).currentLayer;
-    return new FeaturePro(option)
+// 标注图形
+export const useFeature = (labelId = 'label') => {
+    let defOptions = { map: null, layer: null }
+    defOptions.map = useMap().defaultMap;
+    defOptions.layer = useLayer(labelId).currentLayer;
+    return new FeaturePro(defOptions)
 }
-export const useTarget = (option) => {
-    option.map = useMap().defaultMap;
-    option.layer = useLayer().currentLayer;
-    return new Target(option)
+// 目标
+export const useTarget = (targetId = 'target') => {
+    let defOptions = { map: null, layer: null }
+    defOptions.map = useMap().defaultMap;
+    defOptions.layer = useLayer(targetId).currentLayer;
+    return new Target(defOptions)
 }
-export const useTrack = (option) => {
-    option.map = useMap().defaultMap;
-    option.layer = useLayer().currentLayer;
-    return new Track(option)
+// 航迹
+export const useTrack = (targetId = 'target') => {
+    let defOptions = { map: null, layer: null }
+    defOptions.map = useMap().defaultMap;
+    defOptions.layer = useLayer(targetId).currentLayer;
+    return new Track(defOptions)
+}
+// 热力图点
+export const useHeat = (heatId = 'heatmap') => {
+    let defOptions = { map: null, layer: null }
+    defOptions.map = useMap().defaultMap;
+    defOptions.layer = useLayer(heatId).currentLayer;
+    return new FeaturePro(defOptions)
 }

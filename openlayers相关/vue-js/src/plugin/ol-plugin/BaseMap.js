@@ -1,10 +1,10 @@
 /*
  * @Author: duhu
  * @Date: 2021-01-29 09:10:08
- * @LastEditTime: 2021-01-29 15:40:03
+ * @LastEditTime: 2021-03-20 00:25:14
  * @LastEditors: Please set LastEditors
  * @Description: 地图总控 创建地图及图层（配合CustomLayer类）不包括地图上个的图形
- * @FilePath: \vue-js\src\utils\module\FeaturePro.js
+ * @FilePath: \vue-js\src\plugin\ol-plugin\BaseMap.js
  */
 // 样式引入
 import 'ol/ol.css';
@@ -28,16 +28,6 @@ import {
 } from 'ol/interaction';
 
 export default class BaseMap {
-    // static plugins = {};
-
-    // 单例
-    // static instance = null;
-    // static getInstance(data) {
-    //     if (!BaseMap.instance) {
-    //         BaseMap.instance = new BaseMap(data);
-    //     }
-    //     return BaseMap.instance;
-    // }
     /**
      * @param {String} key 唯一
      * @param {Map} defaultMap 默认地图实例
@@ -58,11 +48,6 @@ export default class BaseMap {
         if(!props.isContextMenu){
             self.closeContextMenu()
         }
-        // new Proxy(props,{
-        //     set(target,key,value){
-                
-        //     }
-        // })
     }
     // 创建初始地图模型
     createMap() {
@@ -117,21 +102,6 @@ export default class BaseMap {
         }
     }
 
-    /**
-     * 创建窗口 popup
-     * @param {DOMCLASS} target dom
-     */
-    // createOverlay(overlayId, target) {
-    //     let overlay = new Overlay({
-    //         element: target,
-    //         // position
-    //     })
-    //     this.defaultOverlays.push({
-    //         id: overlayId,
-    //         overlay
-    //     })
-    //     this.defaultMap.addOverlay(overlay)
-    // }
     // 清除
     destory() {
         // this.defaultMap
@@ -148,7 +118,3 @@ export default class BaseMap {
         this.defaultMap = null;
     }
 }
-
-// export const BaseMapIns = (option) => {
-//     return BaseMap.getInstance(option)
-// };

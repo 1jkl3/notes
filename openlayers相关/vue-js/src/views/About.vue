@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-29 09:10:08
- * @,@LastEditTime: ,: 2021-02-04 22:24:31
- * @,@LastEditors: ,: Please set LastEditors
+ * @LastEditTime: 2021-03-09 22:19:32
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-js\src\views\About.vue
 -->
@@ -22,6 +22,8 @@ import {
   destory,
   useMeasure,
   useFeature,
+  useTarget,
+  useTrack,
 } from "@/module";
 import chatMap from "@/components/chatMap";
 export default {
@@ -36,18 +38,46 @@ export default {
     };
   },
   mounted() {
-    this.feature = useFeature(345);
-    this.feature.createFeature(
-      123,
-      [114.298353, 30.623705],
-      { text: "测试", radius: this.feature.conversionRadius(22000) },
-      "Circle"
-    );
-    this.feature.createFeature(
-      345,
-      [113.298353, 30.623705],
-      { text: "测试1"},
-    );
+    // 创建普通图形
+    this.feature = useFeature();
+    let options = {
+      id: 123,
+      coord: [114.298353, 30.623705],
+      time: Date.now(),
+      content: { text: "测试", radius: 22000 },
+      featureType: "Circle",
+    };
+    this.feature.createFeature(options);
+    // 创建目标
+    let opts = {
+      icon: "plane",
+      text: "测试目标",
+      id: "123",
+      coord: [113.298353, 30.623705],
+    };
+    let target = useTarget();
+    target.createTarget(opts);
+    // 创建航迹
+    let trackOpts = {
+      id: 456,
+      coord: [
+        [117.93836294833604, 27.692481553536183],
+        [117.64173208896104, 26.802588975411183],
+        [118.85022818271104, 26.736671006661183],
+      ],
+      text: "",
+      time: Date.now(),
+    };
+    let track = useTrack();
+    track.createTrack(trackOpts);
+    // 更新航迹
+    setTimeout(() => {
+      let coords = [
+        [118.22400747958604, 27.879249131661183],
+        [119.00403677646104, 28.230811631661183],
+      ];
+      track.addCoordinate(456, coords, Date.now());
+    }, 2000);
   },
   methods: {
     selectPolygon() {

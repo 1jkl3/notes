@@ -1,8 +1,8 @@
 /*
  * @Author: duhu
  * @Date: 2021-01-29 09:10:08
- * @,@LastEditTime: ,: 2021-02-04 22:29:18
- * @,@LastEditors: ,: Please set LastEditors
+ * @LastEditTime: 2021-03-20 00:24:17
+ * @LastEditors: Please set LastEditors
  * @Description: 自定义图层 创建新图层并自定义图层内容 如features
  * @FilePath: \vue-js\src\plugin\ol-plugin\CustomLayer.js
  */
@@ -26,7 +26,7 @@ export default class CustomLayer {
      * @description 创建图层
      */
     createLayer(id) {
-        console.log("进入" + id);
+        console.log("进入" + id + '图层');
         if (this.currentLayer && this.currentLayer.get("id") == id) return;
         this.currentLayer = new VectorLayer({
             id: id || Date.now(),
@@ -50,5 +50,20 @@ export default class CustomLayer {
      */
     getLayerById(id) {
         return this.layers.find(item => item.id === id);
+    }
+    /**
+     * @description: 删除图层
+     * @param {*} id
+     * @return {*}
+     */
+    deleteLayerById(id) {
+        let layer = this.getLayerById(id);
+        if (layer) {
+            this.map.removeLayer(layer)
+            this.layers = this.layers.filter(item => item.id !== id)
+        } else {
+            return false
+        }
+        return true
     }
 }

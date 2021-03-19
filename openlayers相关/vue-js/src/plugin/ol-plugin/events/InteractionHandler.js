@@ -1,10 +1,10 @@
 /*
  * @Author: your name
  * @Date: 2021-01-29 09:21:38
- * @LastEditTime: 2021-01-31 02:38:27
+ * @LastEditTime: 2021-03-20 00:30:10
  * @LastEditors: Please set LastEditors
  * @Description: 操作处理类
- * @FilePath: \vue-js\src\utils\events\event.js
+ * @FilePath: \vue-js\src\plugin\ol-plugin\events\InteractionHandler.js
  */
 import {
     singleClick,
@@ -53,7 +53,7 @@ export default class InteractionHandler {
      * @param {Object} content { text,src }
      * @param {Function<Event<Feature,Draw,string>} callback 回调函数
      */
-    onDraw(type = "Piont", src, callback) {
+    onDraw({ type = "Piont", src }, callback) {
         let self = this;
         this.Interaction = new Draw({
             type,

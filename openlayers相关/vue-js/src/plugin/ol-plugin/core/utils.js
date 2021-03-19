@@ -1,12 +1,10 @@
 /*
- * @Author: your name
- * @Date: 2021-01-29 09:10:08
- * @LastEditTime: 2021-02-01 11:02:14
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
+ * @Author: duhu
+ * @Description: 辅助方法
+ * @Date: 2021-02-01 22:53:33
+ * @LastEditTime: 2021-03-09 22:26:32
  * @FilePath: \vue-js\src\plugin\ol-plugin\core\utils.js
  */
-// import Feature from "ol/feature";
 
 /**
  * @description  图标方向计算 条件 （当图标为箭头方向是正上方时）
@@ -19,6 +17,15 @@ function computeDirection(start, end) {
     let dy = end[1] - start[1];
     let direction = Math.atan2(dy, dx) - (Math.PI / 2)
     return -direction;
+}
+/**
+ * @description: 获取线的最后坐标 
+ * @param {*} feature
+ * @return {*}
+ */
+function getLastCoord(feature) {
+    let line = feature.getGeometry();
+    return line.getLastCoordinate();
 }
 /**
  * 获取线的所有坐标
@@ -69,7 +76,7 @@ function overlayPoistion(pixel, rect, target, offset = [10, 10]) {
     }
     console.log(pixel);
     console.log(rect);
-    console.log('x',target.clientWidth,'y',target.clientHeight);
+    console.log('x', target.clientWidth, 'y', target.clientHeight);
     if (target.clientHeight < pixel[1] + rect.h) {
         console.log('y');
         offset[1] = -(pixel[1] + rect.h - target.clientHeight)
@@ -81,5 +88,6 @@ export {
     computeDirection,
     pointInLine,
     getCoordinates,
-    overlayPoistion
+    overlayPoistion,
+    getLastCoord
 }
