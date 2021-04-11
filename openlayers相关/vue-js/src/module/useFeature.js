@@ -1,11 +1,11 @@
 /*
- * @Author: your name
+ * @Author: duhu
  * @Date: 2021-01-29 09:44:10
- * @LastEditTime: 2021-03-20 00:44:43
+ * @LastEditTime: 2021-03-26 21:24:25
  * @Description: 创建图形
  * @FilePath: \vue-js\src\module\useFeature.js
  */
-import { useMap, useLayer } from './index'
+import { useMap, useLayer, useHeatLayer } from './index'
 import { FeaturePro, Target, Track } from '@/plugin/ol-plugin'
 // 标注图形
 export const useFeature = (labelId = 'label') => {
@@ -32,6 +32,6 @@ export const useTrack = (targetId = 'target') => {
 export const useHeat = (heatId = 'heatmap') => {
     let defOptions = { map: null, layer: null }
     defOptions.map = useMap().defaultMap;
-    defOptions.layer = useLayer(heatId).currentLayer;
+    defOptions.layer = useHeatLayer(heatId).currentLayer;
     return new FeaturePro(defOptions)
 }

@@ -1,0 +1,103 @@
+<!--
+ * @Author: duhu
+ * @Description: 
+ * @Date: 2021-03-29 20:03:28
+ * @LastEditTime: 2021-03-30 00:57:37
+ * @FilePath: \vue-js\public\tests1.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, silver, black);
+        }
+
+        .radar {
+            width: 8em;
+            height: 8em;
+            font-size: 32px;
+            position: relative;
+            border-radius: 50%;
+            width: calc(8em + 1.5em);
+            height: calc(8em + 1.5em);
+            background:
+                linear-gradient(black, black);
+        }
+
+        .radar::before {
+            content: '';
+            position: absolute;
+            width: calc(8em / 2);
+            height: calc(8em / 2);
+            top: calc(1.5em / 2);
+            left: calc(1.5em / 2);
+            overflow: hidden;
+            animation: scanning 5s linear infinite;
+            transform-origin: 100% 100%;
+            border-radius: 100% 0 0 0;
+        }
+
+        .radar-needle {
+            width: 1px;
+            height: calc(8em / 2);
+            position: relative;
+            margin: 0 auto;
+            background-color: green;
+            transform: rotate(-45deg);
+            transform-origin: 100% 100%;
+            /* animation: identifier 5s linear infinite; */
+        }
+
+        @keyframes identifier {
+            0% {
+                transform: rotate(-45deg);
+            }
+
+            50% {
+                transform: rotate(135deg);
+            }
+
+            100% {
+                transform: rotate(-45deg);
+            }
+        }
+
+        @keyframes scanning {
+            0% {
+                transform: rotate(0deg);
+                background: linear-gradient(45deg,
+                        rgba(0, 0, 0, 0) 50%,
+                        rgba(0, 192, 0, 1) 100%);
+            }
+
+            50% {
+                transform: rotate(90deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+                background: linear-gradient(-135deg,
+                        rgba(0, 0, 0, 0) 50%,
+                        rgba(0, 192, 0, 1) 100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="radar">
+    </div>
+</body>
+
+</html>

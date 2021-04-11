@@ -2,7 +2,7 @@
  * @Author: duhu
  * @Description: 目标类
  * @Date: 2021-01-31 00:04:39
- * @LastEditTime: 2021-03-09 22:21:08
+ * @LastEditTime: 2021-03-26 21:13:43
  * @FilePath: \vue-js\src\plugin\ol-plugin\module\Target.js
  */
 import { defaultStyle, ActiveStyle, Geometrys } from "../core";
@@ -20,7 +20,7 @@ export default class Target extends FeaturePro {
         let feature = new Feature({
             geometry,
             id,
-            name: 'Icon'
+            type: 'Icon'
         })
         feature.setStyle(style)
         this.layer.getSource().addFeature(feature);

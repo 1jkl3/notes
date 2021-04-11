@@ -1,29 +1,62 @@
-<!--
- * @Author: your name
- * @Date: 2021-02-01 12:31:39
- * @LastEditTime: 2021-02-01 12:32:06
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \vue-js\public\test.html
--->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://unpkg.com/wangeditor/dist/wangEditor.min.js"></script>
+    <title>雷达</title>
+    <meta charset="UTF-8" />
+    <style>
+        @keyframes rotateAnimate {
+            0% {
+                transform: rotate(0deg) skew(45deg)
+            }
+
+
+            /* 25% {
+                transform: rotate(0deg) skew(30deg)
+            } */
+
+            50% {
+                transform: rotate(90deg) skew(45deg)
+            }
+
+            /* 75% {
+                transform: rotate(0deg) skew(30deg)
+            } */
+
+            100% {
+                transform: rotate(0deg) skew(45deg)
+            }
+        }
+
+        .fan-wrapper {
+            overflow: hidden;
+            position: relative;
+            margin: 100px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: red;
+        }
+
+        .fan {
+            position: absolute;
+            left: 0;
+            /* animation: rotateAnimate 3s linear infinite; */
+            /* 这一行很重要，设置左下角为旋转点 */
+            transform-origin: bottom right;
+            transform:skew(45deg);
+            width: 100px;
+            height: 100px;
+            background: linear-gradient();
+            background-color: blue;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="idv"></div>
-    <script>
-        var E = window.wangEditor;
-        var editor = new E("#idv");
-        editor.config.showFullScreen = true;
-        editor.create();
-    </script>
+    <div class="fan-wrapper">
+        <div class="fan"></div>
+    </div>
 </body>
 
 </html>

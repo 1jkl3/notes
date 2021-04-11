@@ -1,7 +1,7 @@
 /*
  * @Author: duhu
  * @Date: 2021-01-29 09:44:19
- * @LastEditTime: 2021-03-20 00:37:49
+ * @LastEditTime: 2021-04-07 00:17:51
  * @LastEditors: Please set LastEditors
  * @Description: 事件 业务逻辑层
  * @FilePath: \vue-js\src\module\useEvent.js
@@ -33,22 +33,31 @@ export const useEventSelect = ({ type, layerId }, callback) => {
     })
 }
 // 点击
-export const useEventSelectClick = () => {
-    useEventSelect('select', (e) => [
-
-    ])
+export const useEventSelectClick = (layerId,callback) => {
+    useEventSelect({ type: 'select', layerId }, (e) => {
+        callback && callback(e)
+    })
 }
 // 触动
-export const useEventSelectMove = () => {
-    useEventSelect('move', (e) => [
+export const useEventSelectMove = (layerId) => {
+    useEventSelect('move', (e) => {
 
-    ])
+    })
 }
 // 双击
-export const useEventSelectDBclick = () => {
-    useEventSelect('dbClick', (e) => [
+export const useEventSelectDBclick = (layerId) => {
+    useEventSelect('dbClick', (e) => {
 
-    ])
+    })
+}
+// 键盘ctrl+click 事件
+export const keyboardClick = (layerId,callback) => {
+    useEventSelectClick(layerId,(e)=>{
+        if(e.mapBrowserEvent.originalEvent.ctrlKey){
+            console.log(e);
+            callback && callback(e)
+        }
+    })
 }
 // 注册绘制图形事件
 export const useEventDraw = ({ type, src, layerId }, callback) => {

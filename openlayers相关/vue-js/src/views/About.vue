@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-01-29 09:10:08
- * @LastEditTime: 2021-03-09 22:19:32
+ * @LastEditTime: 2021-04-07 00:22:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue-js\src\views\About.vue
@@ -10,7 +10,8 @@
   <div class="about">
     <chat-map :type="type" />
     <div class="tabs1" @click="selectLine">线</div>
-    <div class="tabs" @click="selectPolygon">面</div>
+    <div class="tabs" @click="selectPoint">点</div>
+    <!-- <div class="tabs" @click="selectPolygon">面</div> -->
     <button @click="inse">点击</button>
   </div>
 </template>
@@ -22,7 +23,9 @@ import {
   destory,
   useMeasure,
   useFeature,
+  useHeat,
   useTarget,
+  keyboardClick,
   useTrack,
 } from "@/module";
 import chatMap from "@/components/chatMap";
@@ -44,16 +47,18 @@ export default {
       id: 123,
       coord: [114.298353, 30.623705],
       time: Date.now(),
-      content: { text: "测试", radius: 22000 },
+      content: { radius: 22000, lineDash: [8, 8] },
       featureType: "Circle",
     };
     this.feature.createFeature(options);
+    keyboardClick("label");
     // 创建目标
     let opts = {
       icon: "plane",
       text: "测试目标",
       id: "123",
-      coord: [113.298353, 30.623705],
+      coord: [114.298353, 30.623705],
+      // coord: [113.298353, 30.623705],
     };
     let target = useTarget();
     target.createTarget(opts);
@@ -71,13 +76,37 @@ export default {
     let track = useTrack();
     track.createTrack(trackOpts);
     // 更新航迹
-    setTimeout(() => {
-      let coords = [
-        [118.22400747958604, 27.879249131661183],
-        [119.00403677646104, 28.230811631661183],
-      ];
-      track.addCoordinate(456, coords, Date.now());
-    }, 2000);
+    // setTimeout(() => {
+    //   let coords = [
+    //     [118.22400747958604, 27.879249131661183],
+    //     [119.00403677646104, 28.230811631661183],
+    //   ];
+    //   track.addCoordinate(456, coords, Date.now());
+    // }, 2000);
+    // 绘制扇形
+    let sector = useFeature();
+    let sectorOptions = {
+      id: 567,
+      time: Date.now(),
+      content: { radius: 22000, lineDash: [8, 8] },
+      coord: [114.298353, 30.623705],
+      zIndex:9
+    };
+    sector.createSectorFeature(sectorOptions);
+    // 热力图
+    let head = useHeat();
+    let headOptions = {
+      id: 789,
+      time: Date.now(),
+      coord: [119.00403677646104, 28.230811631661183],
+    };
+    let headOptions1 = {
+      id: 289,
+      time: Date.now(),
+      coord: [119.00403677646104, 28.130811631661183],
+    };
+    head.createHeatFeature(headOptions);
+    head.createHeatFeature(headOptions1);
   },
   methods: {
     selectPolygon() {
@@ -88,10 +117,16 @@ export default {
       this.type = "LineString";
       useMeasure(this.type, 123);
       // Polygon Circle
-      // useEventDraw("LineString", null, (opts) => {
+      // useEventDraw({type:this.type, src, layerId}, (opts) => {
       //   // opts.text = "哈哈";
       //   asyncStyleFun(opts);
       // });
+    },
+    selectPoint() {
+      this.type = "Circle";
+      useEventDraw({ type: this.type, layerId: 123 },(e)=>{
+        console.log(e);
+      });
     },
     inse() {
       destory();

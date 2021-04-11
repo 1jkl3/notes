@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-01-29 09:21:38
- * @LastEditTime: 2021-03-20 00:30:10
+ * @LastEditTime: 2021-04-07 00:15:36
  * @LastEditors: Please set LastEditors
  * @Description: 操作处理类
  * @FilePath: \vue-js\src\plugin\ol-plugin\events\InteractionHandler.js
@@ -19,9 +19,9 @@ import {
 import {
     defaultStyle
 } from '../core/config';
-// import {
-//     createBox
-// } from 'ol/interaction/Draw';
+import {
+    createBox
+} from 'ol/interaction/Draw';
 const events = {
     "select": singleClick,
     "dbClick": doubleClick,
@@ -55,10 +55,16 @@ export default class InteractionHandler {
      */
     onDraw({ type = "Piont", src }, callback) {
         let self = this;
+        let graph = type
+        if (type === 'Rect') {
+            graph = 'Rect'
+            type = 'Circle'
+        }
         this.Interaction = new Draw({
+            source: this.layer.getSource(),
             type,
             style: type === 'Icon' ? defaultStyle[type](src) : defaultStyle[type](),
-            // geometryFunction: type === "Circle" ? createBox() : ""
+            geometryFunction: graph === "Rect" ? createBox() : null
         })
         this.Interaction.on("drawend", (e) => {
 

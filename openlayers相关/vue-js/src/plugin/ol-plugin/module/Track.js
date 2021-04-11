@@ -2,7 +2,7 @@
  * @Author: duhu
  * @Description: 轨迹类
  * @Date: 2021-01-31 00:04:39
- * @LastEditTime: 2021-03-09 22:25:56
+ * @LastEditTime: 2021-03-26 21:13:54
  * @FilePath: \vue-js\src\plugin\ol-plugin\module\Track.js
  */
 import {
@@ -39,7 +39,7 @@ export default class Tarck extends FeaturePro {
         current.time.forEach(item => {
             coords.push(...item.coord)
         })
-        console.log(current.feature.getGeometry().getLastCoordinate());
+        // console.log(current.feature.getGeometry().getLastCoordinate());
         current.feature.getGeometry().setCoordinates(coords);
     }
     /**

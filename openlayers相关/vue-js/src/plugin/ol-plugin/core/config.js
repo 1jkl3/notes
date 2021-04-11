@@ -68,7 +68,6 @@ export const commonIcons = {
     "boat": require('@/assets/image/boat.png'),
     'unknown': require("@/assets/image/unknown-target.png")
 }
-
 // 公共样式表
 export const defaultStyle = {
     "Icon": (src, text, rotation) => {
@@ -84,7 +83,7 @@ export const defaultStyle = {
             })
         })
     },
-    "Point": (content) => {
+    "Point": (text) => {
         return new Style({
             stroke: new Stroke({
                 color: "#fff"
@@ -95,17 +94,18 @@ export const defaultStyle = {
                     color: "red"
                 })
             }),
-            text: content && new Text({
-                text: content,
+            text: text && new Text({
+                text: text,
                 offsetY: 18
             })
         })
     },
-    "LineString": (text) => {
+    "LineString": (text,lineDash) => {
         return new Style({
             stroke: new Stroke({
                 color: "#000",
                 width: 2,
+                lineDash
             }),
             image: new CircleStyle({
                 radius: 5,
@@ -119,11 +119,12 @@ export const defaultStyle = {
             })
         })
     },
-    "Polygon": (text) => {
+    "Polygon": (text,lineDash) => {
         return new Style({
             stroke: new Stroke({
                 color: "#ff6688",
-                width: 2
+                width: 2,
+                lineDash
             }),
             image: new CircleStyle({
                 radius: 5,
@@ -140,18 +141,36 @@ export const defaultStyle = {
             })
         })
     },
-    "Circle": (text) => {
+    "Circle": (text,lineDash) => {
         return new Style({
             stroke: new Stroke({
-                color: "#000"
+                color: "#000",
+                lineDash
             }),
             fill: new Fill({
-                color: "#ff6688"
+                color: "rgba(0,0,255,0.2)"
             }),
             text: text && new Text({
                 text,
                 offsetY: 18
             })
+        })
+    },
+    "Sector": (text, lineDash,zIndex) => {
+        return new Style({
+            stroke: new Stroke({
+                color: 'red',
+                lineDash,
+                width: 2
+            }),
+            fill: new Fill({
+                color: 'rgba(0, 0, 255, 0.2)'
+            }),
+            text: text && new Text({
+                text,
+                offsetY: 18
+            }),
+            zIndex
         })
     }
 }
